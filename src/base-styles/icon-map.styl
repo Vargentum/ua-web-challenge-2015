@@ -1,0 +1,30 @@
+/*
+This file has excluded from build system in Gruntfile.coffee
+Keep in mind this, if you'll rename it.
+*/
+
+@font-face {
+  font-family: "ua-web-challenge-font";
+  src: url('../fonts/ua-web-challenge-font.eot');
+  src: url('../fonts/ua-web-challenge-font.eot?#iefix') format('eot'),
+       url('../fonts/ua-web-challenge-font.woff') format('woff'),
+       url('../fonts/ua-web-challenge-font.ttf') format('truetype'),
+       url('../fonts/ua-web-challenge-font.svg#ua-web-challenge-font') format('svg');
+}
+
+.uv-icon:before {
+  font-family: "ua-web-challenge-font";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-transform: none;
+}
+
+
+.uv-icon--test-icon:before {
+  @extend .uv-icon:before
+  content: "\E001";
+}
