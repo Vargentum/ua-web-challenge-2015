@@ -1,0 +1,55 @@
+$disabled = unquote('.disabled-onepage-scroll')
+
+
+body
+html
+  overflow: hidden;
+  transition: opacity 400ms;
+  display block
+  size 100%  
+
+  &{$disabled}
+    position: inherit
+
+
+
+.onepage
+  
+
+  &-wrapper
+    display: block;
+    size 100%
+    position: relative;
+    transform-style: preserve-3d;
+
+    {$disabled} &
+      position: inherit
+      transform: none !important;
+      min-height: 100%;
+      
+
+
+  &-pagination
+    ctr y
+    right 10px
+    z-index: 5;
+
+    li
+      size 5px
+      test()
+
+
+    {$disabled} &
+      display none   
+
+
+
+  &-section
+    size 100%
+    test()
+    
+
+    {$disabled} &
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
