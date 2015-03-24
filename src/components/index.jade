@@ -17,11 +17,43 @@ html.no-js(lang='en')
 
 
   body(itemscope, itemtype='http://schema.org/WebPage')
+    
+    nav.site-nav
+      ul.site-nav__list
+        li#[a.site-nav__link(href="#") Главная]
+        li#[a.site-nav__link(href="#") Главная]
+        li#[a.site-nav__link(href="#") Главная]
+        li#[a.site-nav__link(href="#") Главная]
+        li#[a.site-nav__link(href="#") Главная]
+
+    aside.pre-header
+      .pre-header__container
+        select
+          option(value="RU" default)
+          option(value="УК")
+          option(value="EN")
+        span.site-nav__opener
 
     
     .onepage
 
-      section.onepage-section 1 
+      //hero 
+      section.onepage-section.hero
+        .hero__container
+          header.hero__header
+            h1.hero__title
+              span.hero__title__font-accent IT #[br]
+              | Confe
+              span.hero__title__font-equal rence
+              span.hero__title__font-accent и
+              | я
+              time.hero__time 12 - 18 апреля
+            button.hero__btn купить билет
+            cite.hero__cite ... у нас интересней всего ©Женя
+
+          aside.hero__video
+
+        
       section.onepage-section 2
       section.onepage-section 3
       section.onepage-section 4

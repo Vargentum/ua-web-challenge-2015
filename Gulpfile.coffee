@@ -6,7 +6,6 @@ pngquant = require('imagemin-pngquant')
 jeet     = require('jeet')
 
 
-
 path = 
   css:
     src: [
@@ -43,9 +42,23 @@ path =
     dest: './app/assets/fonts'
 
 
+  font:
+    src: './src/fonts/{,**/}*.{otf,ttf}'
+    dest: './app/assets/fonts/'
+
+
 
 gulp.task 'clear', ->
   $.rimraf('./app')
+
+
+
+gulp.task 'font', ->
+  gulp.src(path.font.src)
+    .pipe($.ttf2woff())
+    .pipe($.ttf2eot())
+    .pipe(gulp.dest(path.font.dest))
+
 
 
 gulp.task 'icon-font', ->

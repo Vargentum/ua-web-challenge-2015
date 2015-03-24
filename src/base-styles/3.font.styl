@@ -1,13 +1,28 @@
 /*--------------------------------------
     Font embeding
 --------------------------------------*/
-if $font-face
+$fonts = 100 normal 'UThin'
+        ,100 italic 'UThinItalic'
+        ,200 normal 'Thin'
+        ,200 italic 'ThinItalic'
+        ,300 normal 'Light'
+        ,300 italic 'LightItalic'
+        ,400 normal 'Reg'
+        ,400 italic 'RegItalic'
+        ,500 normal 'Medium'
+        ,500 italic 'MediumItalic'
+        ,700 normal 'Bold'
+        ,700 italic 'BoldItalic'
+        ,900 normal 'UBlack'
+        ,900 italic 'UBlackItalic'
+        
 
-  for $font in $brand-f $title-f
-    @font-face
-      font-family: $font
-      font-style: normal
-      font-weight: normal
-      src: url($font-path + $font + '.eot')
-      src: url($font-path + $font + '.eot?#iefix') format("embedded-opentype"),
-           url($font-path + $font + '.woff') format("woff")
+/*available but not used: Book */
+
+
+for $font in $fonts
+  @font-face
+    font-family: 'PFEncoreSansPro'
+    font-weight: $font[0]
+    font-style: $font[1]
+    src: url($font-path + 'PFEncoreSansPro-' + $font[2] + '.otf') format("opentype")
