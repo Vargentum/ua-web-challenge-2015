@@ -98,12 +98,38 @@ pi($align = auto)
   vertical-align $align
 
 
-/*--------------------------------------
+/*------------------------------------*\
+    Retina support mixins
+\*------------------------------------*/
+retina()
+  @media (-webkit-min-device-pixel-ratio: 2), 
+         (min-resolution: 192dpi)
+    {block}
+      
+// Updated sprite mixin with retina support
+sprite-retina()
+  sprite arguments
+
+  +retina()
+    background-image url($img-path + 'ua-web-challenge-sprite_2x.png')
+    background-size $spritesheet-width $spritesheet-height
+
+
+/*------------------------------------*\
   Quick image insert
---------------------------------------*/
-img($name, $position = '50% 50%')
-  background-image data($img-path + $name)
+\*------------------------------------*/
+img($name, $position = '50% 50%', $repeat = no-repeat)
+  background-image url($img-path + $name + '.png')
+  background-repeat $repeat
   background-position unquote($position)
+
+  +retina()
+    background-image url($img-path + $name + '_2x.png')
+
+
+img-size()
+  size arguments
+  background-size arguments
 
 
 /*--------------------------------------

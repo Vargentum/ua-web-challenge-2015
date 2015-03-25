@@ -11,6 +11,36 @@ make-skewed-bg(x)
     z-index: -1
 
 /*----------------------------------------
+  Typography
+----------------------------------------*/
+.uv-typography
+  font-size 18px
+  font-weight 300
+
+  h4,ul,li,p
+    margin-bottom 5px
+  
+  h4
+    font-weight 700
+    line-height 22px
+
+  i
+    font-style italic
+    
+  ul
+    
+    li
+      position relative
+      padding-left 20px
+      
+      &:before
+        absolute left top 1px
+        content '•'
+        color $brand-c
+      
+  
+
+/*----------------------------------------
   Button
 ----------------------------------------*/
 
@@ -57,7 +87,7 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
 ----------------------------------------*/
 .uv-section
   
-  $types = 'gray' 'white' 'brand'
+  $types = 'gray' 'white' 'brand' 'black'
   
   for $type in $types
     &--{unquote($type)}
@@ -152,7 +182,12 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
     
     &__title
       @extend .uv-section__title
-      margin-bottom 100px
+      
+      .cssvhunit &
+        margin-bottom 15vh
+
+      .no-cssvhunit &
+        margin-bottom 100px
     
 
     &__article
@@ -169,7 +204,7 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
   
       for $i in 1..$quantity
         &:nth-child({$i}):before
-          sprite lookup('$whats-new-' + $i)
+          sprite-retina lookup('$whats-new-' + $i)
 
       //set spaces
       set-space()
@@ -177,8 +212,11 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
         &__list
           margin-top: -(arguments)
           
-      set-space 50px
+      .cssvhunit &
+        set-space 10vh
 
+      .no-cssvhunit &
+        set-space 50px
 
       .flexbox &
         @extend .f-grid--11
@@ -203,6 +241,149 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
         line-height: 1.2
         font-weight 700
         text-transform uppercase
+
+
+
+  /*Section 3*/
+  &-for-whom
+    $sections-quantity = 6px
+
+    @extend .uv-section--black
+    make-skewed-bg -110px
+    
+
+    &__container
+      height inherit
+      container()
+      
+      for $i in 1..$sections-quantity
+        &.pane-{$i}:before
+          img('for-whom-' + $i)
+            
+      
+      &:before
+        pb left right top bottom
+        background-size cover
+        z-index: -2
+        
+      &:after
+        pb left right top bottom
+        background-color #000
+        z-index: -3
+      
+      .flexbox &
+        @extend .f-box
+        @extend .f-align--2-13
+
+
+    &__header
+      .flexbox &
+        @extend .f-grid--7
+
+
+    &__title
+      @extend .uv-section__title
+
+      .cssvhunit &
+        margin-bottom 5vh
+        
+      .no-cssvhunit &
+        margin-bottom 50px
+      
+
+    &__nav
+      width 200px
+
+      &__unit
+        position relative
+        overflow hidden
+        color $title-c
+        font-size 14px
+        line-height: 1
+        font-weight 700
+        text-transform uppercase
+        trans color
+        cursor pointer
+
+        .cssvhunit &
+          
+        .flexbox &
+          height 10vh
+          @extend .f-box
+          @extend .f-align--3-1
+          padding-bottom 20px
+          
+        .no-flexbox &
+          padding-y 40px 20px
+          
+
+        &:before
+          pb left right top bottom
+          background-color $title-c
+          z-index: -1
+          
+          .csstransforms &
+            transform translateY(calc(100% \- 5px))
+            trans transform
+            
+          .no-csstransforms
+            opacity 0
+            trans opacity
+          
+
+        &:hover
+          &:before
+            .csstransforms &
+              transform translateY(calc(100% \- 10px))
+            
+            .no-csstransforms &
+              opacity 1
+                
+
+        &.is-active
+          color $white-c
+          cursor default
+          
+          &:before
+            .csstransforms &
+              transform translateY(0)
+
+
+
+
+    &__content
+      @extend .uv-typography
+      position relative
+      height inherit
+      color $white-c
+      .flexbox &
+          @extend .f-grid--14
+          
+      
+      &__section
+        absolute left right top bottom
+        trans opacity
+        opacity 0
+        
+        .cssvhunit &
+          vLine 5vh
+          
+        .no-cssvhunit &
+          vLine 50px
+
+        .flexbox &
+          @extend .f-box
+          @extend .f-dir--col
+          @extend .f-align--1-2
+        
+        &.is-active
+          opacity 1
+          
+
+        for $i in 1..$sections-quantity
+          &:nth-child({$i})  &__label
+            sprite lookup('$for-whom-' + $i)
+            
 
 
 

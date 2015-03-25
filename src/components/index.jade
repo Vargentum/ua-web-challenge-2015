@@ -6,15 +6,11 @@ html.no-js(lang='en')
   head
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width,initial-scale=1')
-    
     //- Modernizr
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js")
-    
+    script(src="assets/js/ua-web-challenge-modernizr.min.js")
     //- Primary stylesheet
     link(href='assets/css/ua-web-challenge-styles.min.css', rel='stylesheet')
-    //- link(href='assets/css/ua-web-challenge-styles.css', rel='stylesheet')
     
-
 
   body(itemscope, itemtype='http://schema.org/WebPage')
     
@@ -39,7 +35,6 @@ html.no-js(lang='en')
     
     .onepage
 
-      // section 1
       //- section.onepage-section.s-hero.us
       //-   .s-hero__container
       //-     header.s-hero__header
@@ -56,41 +51,89 @@ html.no-js(lang='en')
       //-     aside.s-hero__video
 
       
-      // section 2  
-      section.onepage-section.uv-section--gray
-        div.s-whats-new
-          header
-            h2.s-whats-new__title Что нового?
+      //- section.onepage-section.uv-section--gray
+      //-   div.s-whats-new
+      //-     header
+      //-       h2.s-whats-new__title Что нового?
 
-          ul.s-whats-new__article__list
-            li.s-whats-new__article
-              article
-                header
-                  h3.s-whats-new__article__title Первая в Украине онлайн конференция для разработчиков
-                p Шесть дней докладов , которые Вы слушаете не выходя из дома или офиса. Это будет самая интенсивная неделя для Вашего профессионального развития
-            li.s-whats-new__article
-              article
-                header
-                  h3.s-whats-new__article__title Всестороннее развитие
-                p Бекенд разработчики интересуются фронтенд новинками, тестировщики - бекендом, дизайнеры - фронтендом, а фронтенды - дизайном. Мы даём возможность всем удовлетворить свой интерес, не бегая на три-четыре профильных конференции
+      //-     ul.s-whats-new__article__list
+      //-       li.s-whats-new__article
+      //-         article
+      //-           header
+      //-             h3.s-whats-new__article__title Первая в Украине онлайн конференция для разработчиков
+      //-           p Шесть дней докладов , которые Вы слушаете не выходя из дома или офиса. Это будет самая интенсивная неделя для Вашего профессионального развития
+      //-       li.s-whats-new__article
+      //-         article
+      //-           header
+      //-             h3.s-whats-new__article__title Всестороннее развитие
+      //-           p Бекенд разработчики интересуются фронтенд новинками, тестировщики - бекендом, дизайнеры - фронтендом, а фронтенды - дизайном. Мы даём возможность всем удовлетворить свой интерес, не бегая на три-четыре профильных конференции
 
-            li.s-whats-new__article
-              article
-                header
-                  h3.s-whats-new__article__title Душевная оффлайн автепати
-                p Только для участников ІТ-Конференции и экспертов. Вы сможете пропустить пару бокальчиков с коллегами по цеху или  поужинать вместе с экспертом
-            li.s-whats-new__article
-              article
-                header
-                  h3.s-whats-new__article__title Все темы уникальны
-                p Ранее спикеры с ними нигде не выступали. Спикеры – признанные эксперты и реальные практики
+      //-       li.s-whats-new__article
+      //-         article
+      //-           header
+      //-             h3.s-whats-new__article__title Душевная оффлайн автепати
+      //-           p Только для участников ІТ-Конференции и экспертов. Вы сможете пропустить пару бокальчиков с коллегами по цеху или  поужинать вместе с экспертом
+      //-       li.s-whats-new__article
+      //-         article
+      //-           header
+      //-             h3.s-whats-new__article__title Все темы уникальны
+      //-           p Ранее спикеры с ними нигде не выступали. Спикеры – признанные эксперты и реальные практики
 
                 
-    
+      section.onepage-section.s-for-whom
+        div.s-for-whom__container.pane-1
+          header.s-for-whom__header
+            h2.s-for-whom__title для кого?
+
+            ul.s-for-whom__nav
+              li.s-for-whom__nav__unit.is-active для кого
+              li.s-for-whom__nav__unit front-end developers 
+              li.s-for-whom__nav__unit back-end developers 
+              li.s-for-whom__nav__unit testers
+              li.s-for-whom__nav__unit web-designers
+              li.s-for-whom__nav__unit startupers
+
+          
+          .s-for-whom__content
+
+            article.s-for-whom__content__section.is-active
+              span.s-for-whom__content__section__label
+              div
+                h4 В фокусе
+                p тенденции в веб-дизайне, самые дорогие и качественные кейсы, лайфхаки от настоящих мастеров.
+                p Присоединяйтесь к нам на день с высококлассными презентациями от лучших в нашей отрасли.
+              div
+                h4 Участники конференции
+                ul
+                  li дизайнеры со стажем
+                  li дизайнеры с серьёзным стажем, арт-директора и ведущие дизайнеры компаний
+                  li джуниоры - их меньшинство и только те, кто крайне жаждет быстрого роста.   
+                p &nbsp;
+                p 
+                  i Предупреждаем сразу - материалы не для  новичков
+
+            - i = 0
+            while i < 5
+              - i++
+              article.s-for-whom__content__section
+                span.s-for-whom__content__section__label
+                div
+                  h4 В фокусе
+                  p тенденции в веб-дизайне, самые дорогие и качественные кейсы, лайфхаки от настоящих мастеров.
+                  p Присоединяйтесь к нам на день с высококлассными презентациями от лучших в нашей отрасли.
+                div
+                  h4 Участники конференции
+                  ul
+                    li дизайнеры со стажем
+                    li дизайнеры с серьёзным стажем, арт-директора и ведущие дизайнеры компаний
+                    li джуниоры - их меньшинство и только те, кто крайне жаждет быстрого роста.   
+                  p &nbsp;
+                  p 
+                    i Предупреждаем сразу - материалы не для  новичков
+            
 
 
 
-      section.onepage-section 3
       section.onepage-section 4
 
 

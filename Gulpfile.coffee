@@ -26,6 +26,7 @@ path =
   scripts:
     plugins: './src/{,**/}*.js'
     coffee: './src/{,**/}*.coffee'
+    modernizr: './src/components/modernizr/modernizr.custom.js'
     dest: './app/assets/js'
 
   jade:
@@ -168,6 +169,13 @@ gulp.task 'sprites', ->
     .pipe(gulp.dest(path.sprites.dest.css))
 
 
+gulp.task 'modernizr', ->
+  gulp.src(path.scripts.modernizr)
+    .pipe($.uglify())
+    .pipe($.rename(pkg.name + '-modernizr.min.js'))
+    .pipe(gulp.dest(path.scripts.dest))
+
+
 gulp.task 'plugins', ->
   gulp.src(path.scripts.plugins)
     .pipe($.concat(pkg.name + '-plugins.js'))
@@ -238,6 +246,7 @@ gulp.task 'build', [
   'img-retinafy'
   'img-minify'
   'sprites'
+  'modernizr'
   'plugins'
   'coffee'
 ]
