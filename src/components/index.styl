@@ -53,68 +53,158 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
       
 
 /*----------------------------------------
-  Hero
+  Sections
 ----------------------------------------*/
-.hero
-  $hero-font-c = darken($title-c, 50%)
-
-  position relative
-  overflow hidden
-  color $hero-font-c
-  transform: translate3d(0,0,0) //prevent flicker on button
-  make-skewed-bg 325px
+.uv-section
   
+  $types = 'gray' 'white' 'brand'
+  
+  for $type in $types
+    &--{unquote($type)}
+      background-color lookup('$' + $type + '-c')
 
-  &__container
+
+  &__title
+    color $title-c
+    font-size 48px
+    font-weight 900
+    text-transform uppercase
+
+
+
+/*----------------------------------------
+  Hero (Grand section)
+----------------------------------------*/
+.s
+
+  /*Section 1*/  
+  &-hero
+    $hero-font-c = darken($title-c, 50%)
+
+    position relative
+    overflow hidden
+    color $hero-font-c
+    transform: translate3d(0,0,0) //prevent flicker on button
+    make-skewed-bg 325px
+    
+
+    &__container
+      container()
+      height 100%
+      
+      .flexbox &
+        @extend .f-box
+        @extend .f-align--13-13
+      
+    
+    &__header
+      width 475px
+      
+      .flexbox &
+        @extend .f-box
+        @extend .f-dir--col
+        @extend .f-align--1-2
+      
+
+
+    &__title
+      text-transform: uppercase
+      font-weight 900
+      font-size 130px
+      line-height: .75
+
+      &__font-accent
+        font-weight 100
+        
+      &__font-equal
+        display block
+        letter-spacing 3px
+
+
+    &__time
+      //inherited styles from &__title
+      margin-left 5px
+      font-size 40px
+      font-weight 100
+      text-transform: lowercase
+      
+
+    &__btn
+      make-btn 70px $hero-font-c 6px 13px
+      margin-y 60px
+      
+
+    &__cite
+      color #7B6C03
+      font-size 14px
+      
+  
+  /*Section 2*/
+  &-whats-new
     container()
     height 100%
-    
-    .flexbox &
-      @extend .f-box
-      @extend .f-align--13-13
-    
-  
-  &__header
-    width 475px
     
     .flexbox &
       @extend .f-box
       @extend .f-dir--col
       @extend .f-align--1-2
     
+    
+    &__title
+      @extend .uv-section__title
+      margin-bottom 100px
+    
 
-
-  &__title
-    text-transform: uppercase
-    font-weight 900
-    font-size 130px
-    line-height: .75
-
-    &__font-accent
-      font-weight 100
+    &__article
+      $quantity = 4
       
-    &__font-equal
-      display block
-      letter-spacing 3px
+      position relative
+      padding-left 85px
+      font-weight 300
 
 
-  &__time
-    //inherited styles from &__title
-    margin-left 5px
-    font-size 40px
-    font-weight 100
-    text-transform: lowercase
+      //set icons
+      &:before
+        pb left top
+  
+      for $i in 1..$quantity
+        &:nth-child({$i}):before
+          sprite lookup('$whats-new-' + $i)
+
+      //set spaces
+      set-space()
+        margin-top: arguments
+        &__list
+          margin-top: -(arguments)
+          
+      set-space 50px
+
+
+      .flexbox &
+        @extend .f-grid--11
+      
+      .no-flexbox &
+        span(1/2)
+        padding-right 10%
+        
+        
+
+      &__list
+        .flexbox &
+          @extend .f-box
+          @extend .f-align--1-13
+          @extend .f-option--wrap
+      
     
+      &__title
+        margin-bottom 10px
+        color #444
+        font-size 14px
+        line-height: 1.2
+        font-weight 700
+        text-transform uppercase
 
-  &__btn
-    make-btn 70px $hero-font-c 6px 13px
-    margin-y 60px
-    
 
-  &__cite
-    color #7B6C03
-    font-size 14px
-    
 
 /*----------------------------------------
   Site nav
