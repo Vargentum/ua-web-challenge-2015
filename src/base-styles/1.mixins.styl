@@ -377,3 +377,42 @@ show()
 
 show-as()
   display arguments !important
+
+
+
+/*--------------------------------------
+  Transform helper
+  works only with px
+--------------------------------------*/
+complex-transform($dir, $val)
+  if $dir is 'x'
+    .csstransforms &
+      transform translateX($val)
+    if unit($val) isnt '%'
+      .no-csstransforms &
+        margin-left: $val
+      
+  if $dir is 'y'
+    .csstransforms &
+      transform translateY($val)
+    if unit($val) isnt '%'
+      .no-csstransforms &
+        margin-top: $val
+
+
+/*--------------------------------------
+  Transform helper
+  works only with px
+--------------------------------------*/
+complex-gap($prop, $val, $val-fallback)
+  if unit($val) is 'vw'
+    .cssvwunit &
+      {$prop}: $val
+    .no-cssvwunit &
+      {$prop}: $val-fallback
+      
+  if unit($val) is 'vh'
+    .cssvhunit &
+      {$prop}: $val
+    .no-cssvhunit &
+      {$prop}: $val-fallback

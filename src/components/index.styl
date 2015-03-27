@@ -95,21 +95,73 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
 
 
   &__title
-    color $title-c
+    color $black-c
     font-size 48px
     font-weight 900
     text-transform uppercase
+    
+    &--white
+      color $white-c
 
 
 
 /*----------------------------------------
-  Hero (Grand section)
+  Nav unit constructor
+----------------------------------------*/
+make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
+  width: $unit-w
+  position relative
+  overflow hidden
+  color $def-text-c
+  font-size 14px
+  line-height: 1
+  font-weight 700
+  text-transform uppercase
+  trans()
+  cursor pointer
+
+  .csstransforms &
+    &:before
+      trans()
+      pb left right top bottom
+      background-color $def-badge-c
+      transform translateY(calc(100% \- 5px))
+      z-index: -1
+ 
+
+  &:hover
+    .csstransforms &
+      &:before
+        background-color $hov-badge-c
+    .no-csstransforms &
+      color $hov-text-c
+
+
+  &.is-active
+    color $hov-text-c
+    cursor default
+    padding-left 10px
+    
+    .csstransforms &
+      &:before
+        background-color $hov-badge-c
+        transform translateY(0)
+    
+    .no-csstransforms &
+      background-color $hov-badge-c
+
+
+
+/*----------------------------------------
+  Sections
 ----------------------------------------*/
 .s
 
-  /*Section 1*/  
+  /*----------------------------------------
+    Hero (section 1)
+  ----------------------------------------*/
   &-hero
-    $hero-font-c = darken($title-c, 50%)
+    $hero-font-c = darken($black-c, 50%)
 
     position relative
     overflow hidden
@@ -169,7 +221,9 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
       font-size 14px
       
   
-  /*Section 2*/
+  /*----------------------------------------
+    Whats new (section 2)
+  ----------------------------------------*/
   &-whats-new
     container()
     height 100%
@@ -182,12 +236,7 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
     
     &__title
       @extend .uv-section__title
-      
-      .cssvhunit &
-        margin-bottom 15vh
-
-      .no-cssvhunit &
-        margin-bottom 100px
+      complex-gap(margin-bottom, 15vh, 100px)
     
 
     &__article
@@ -196,8 +245,16 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
       position relative
       padding-left 85px
       font-weight 300
+      complex-gap(margin-bottom, 10vh, 50px)
 
-
+      .flexbox &
+        @extend .f-grid--11
+      
+      .no-flexbox &
+        span(1/2)
+        padding-right 10%
+        
+        
       //set icons
       &:before
         pb left top
@@ -211,21 +268,7 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
         margin-top: arguments
         &__list
           margin-top: -(arguments)
-          
-      .cssvhunit &
-        set-space 10vh
-
-      .no-cssvhunit &
-        set-space 50px
-
-      .flexbox &
-        @extend .f-grid--11
-      
-      .no-flexbox &
-        span(1/2)
-        padding-right 10%
-        
-        
+    
 
       &__list
         .flexbox &
@@ -244,7 +287,9 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
 
 
 
-  /*Section 3*/
+  /*----------------------------------------
+    For whom (section 3)
+  ----------------------------------------*/
   &-for-whom
     $sections-quantity = 6px
 
@@ -283,29 +328,14 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
 
     &__title
       @extend .uv-section__title
-
-      .cssvhunit &
-        margin-bottom 5vh
-        
-      .no-cssvhunit &
-        margin-bottom 50px
+      complex-gap(margin-bottom, 5vh, 50px)
       
 
     &__nav
       width 200px
 
       &__unit
-        position relative
-        overflow hidden
-        color $title-c
-        font-size 14px
-        line-height: 1
-        font-weight 700
-        text-transform uppercase
-        trans color
-        cursor pointer
-
-        .cssvhunit &
+        make-nav-unit($black-c,$white-c,$black-c,$black-c)
           
         .flexbox &
           height 10vh
@@ -315,39 +345,6 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
           
         .no-flexbox &
           padding-y 40px 20px
-          
-
-        &:before
-          pb left right top bottom
-          background-color $title-c
-          z-index: -1
-          
-          .csstransforms &
-            transform translateY(calc(100% \- 5px))
-            trans transform
-            
-          .no-csstransforms
-            opacity 0
-            trans opacity
-          
-
-        &:hover
-          &:before
-            .csstransforms &
-              transform translateY(calc(100% \- 10px))
-            
-            .no-csstransforms &
-              opacity 1
-                
-
-        &.is-active
-          color $white-c
-          cursor default
-          
-          &:before
-            .csstransforms &
-              transform translateY(0)
-
 
 
 
@@ -385,6 +382,164 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
             sprite lookup('$for-whom-' + $i)
             
 
+  /*----------------------------------------
+    Speakers (section 4)
+  ----------------------------------------*/
+  &-speakers
+    $unit-w = 165px
+    $unit-h = 275px
+    $unit-gap = 30px
+
+    $unit-photo-h = 170px
+    
+    $bg-c = #191919
+    $contrast-c = #242424
+
+    background-color $bg-c
+
+    &__container
+      container()
+      height 100%
+      
+      .flexbox &
+        @extend .f-box
+        @extend .f-dir--col
+        @extend .f-align--13-2
+   
+
+    &__title
+      @extend .uv-section__title
+      @extend .uv-section__title--white
+      complex-gap(margin-bottom, 5vh, 50px)
+
+
+    &__header
+      complex-gap(margin-bottom, 3vh, 30px)
+      margin-x 25px 15px  //equal incorrect slider centering
+      
+      .flexbox &
+        @extend .f-box
+        @extend .f-align--3-13
+      .no-flexbox &
+        jLine()
+
+
+    &__nav
+      hLine bottom $unit-gap
+      max-width ($unit-w + $unit-gap) * 6
+      position relative 
+      z-index: 1
+
+      &__unit
+        width: $unit-w
+        make-nav-unit($white-c, $black-c, $contrast-c, $white-c)
+
+        .flexbox &
+          @extend .f-line
+          @extend .f-align--2-1
+          height 60px
+          
+        .no-flexbox &
+          padding-y 20px
+          
+
+    &__person
+      size $unit-w $unit-h
+      background-color $white-c
+      font-weight 300
+      line-height: 1.2
+      overflow hidden
+      
+      &__photo
+        size $unit-w $unit-photo-h
+        position relative
+        trans top
+        
+      &__body
+        padding: 10px
+        position relative
+        trans top
+        backface-visibility hidden
+      
+      &__name
+        margin-bottom 5px
+        font-weight 700
+        font-size 14px
+        color $black-c
+        text-transform: uppercase
+
+      &:hover &__photo
+        complex-transform 'y' -25px
+
+      &:hover &__body
+        complex-transform 'y' -15px
+      
+
+    &__slider
+          
+      &__nav
+        width $unit-w
+        
+        .flexbox &
+          @extend .f-box
+          @extend .f-align--2-13
+        .no-flexbox &
+          jLine()
+          white-space nowrap
+
+
+      &__arrows
+        .flexbox &
+          @extend .f-box
+          @extend .f-gap--M
+          @extend .f-align--1-13
+        .no-flexbox &
+          hLine top 10px
+          
+        .bx-prev
+        .bx-next
+          $h = 55px
+          size 40px $h
+          position relative
+          border 4px solid $contrast-c
+          font-size 16px
+          color alpha($white-c, .5)
+          cursor: pointer
+          trans()
+          pressable()
+          
+          .flexbox &
+            @extend .f-box
+            @extend .f-align--2-2
+          .no-flexbox &
+            text-align center
+            line-height: $h  
+        
+          &:hover:not(.disabled)
+            color $white-c
+            border-color alpha($white-c, .5)
+
+          &.disabled
+            pressable 0
+            cursor default
+
+          &:focus
+            outline none
+            
+        .bx-prev
+          @extend .uv-icon--arrow-prev
+        .bx-next
+          @extend .uv-icon--arrow-next
+          
+    
+
+      &__counter
+        
+        &__wrap
+          color #4A4949
+          font-size 14px
+          font-weight 700
+          text-transform uppercase
 
 
 /*----------------------------------------
@@ -396,7 +551,7 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
   absolute right top
   width 100%
   height 100%
-  background-color $title-c
+  background-color $black-c
   padding-right $rt-align-val
 
   .flexbox &
