@@ -1,3 +1,68 @@
+/*----------------------------------------
+  Site nav
+----------------------------------------*/
+.site-nav
+  $rt-align-val = s('calc((100% - %s) / 2)', $base-max-w)
+
+  absolute right top
+  width 100%
+  height 100%
+  background-color $black-c
+  padding-right $rt-align-val
+
+  .flexbox &
+    @extend .f-box
+    @extend .f-align--2-3
+  
+  .csstransforms &
+    transform translateX(100%)
+    
+    &.is-active
+      transform translateX(0)
+
+
+  .no-csstransforms &
+    left 100%
+    
+    &.is-active
+      left auto
+      right 0
+      
+
+  &__opener
+    size 20px
+    display inline-block
+    background-color red
+    cursor pointer
+    
+
+  &__list
+    text-align right
+    
+  &__link
+    display block
+    font-size 36px
+    font-weight 700
+    color $white-c
+    trans color
+
+    &:hover
+      color $brand-c      
+
+/*----------------------------------------
+  Pre-header
+----------------------------------------*/
+.pre-header
+  fixed right left top
+  z-index: 1
+  
+  &__container
+    container()
+    hLine middle
+    text-align right
+    
+  
+
 make-skewed-bg(x)
   transform: translate3d(0,0,0);
   &:before
@@ -659,13 +724,11 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
         //sign on right
         $primary-c = #3c3c3c
         $secondary-c = $white-c
-        $size = 26px
         &:after
           p-ctr y
           content '+'
           right 0
-          size $size
-          line-height: ($size - 1px)
+          ctr-at 26px
           text-align center
           background-color $primary-c
           border 2px solid $primary-c
@@ -748,7 +811,6 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
         
       
     &__type
-      test()
       $gray-c = #888
 
       .flexbox &
@@ -855,67 +917,81 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
         @extend .uv-btn--brand-n-black
 
 
-/*----------------------------------------
-  Site nav
-----------------------------------------*/
-.site-nav
-  $rt-align-val = s('calc((100% - %s) / 2)', $base-max-w)
-
-  absolute right top
-  width 100%
-  height 100%
-  background-color $black-c
-  padding-right $rt-align-val
-
-  .flexbox &
-    @extend .f-box
-    @extend .f-align--2-3
-  
-  .csstransforms &
-    transform translateX(100%)
-    
-    &.is-active
-      transform translateX(0)
 
 
-  .no-csstransforms &
-    left 100%
-    
-    &.is-active
-      left auto
-      right 0
+  /*----------------------------------------
+    video (section 7)
+  ----------------------------------------*/
+  &-video
+    @extend .uv-section--black
+
+    &__title
+      @extend .uv-section__title
+      complex-vunit(margin-bottom, 5vh, 50px)
+      color $white-c
       
 
-  &__opener
-    size 20px
-    display inline-block
-    background-color red
-    cursor pointer
-    
+    &__list
+      $spacer = 15px
+      margin-x -($spacer)
+      
+      .flexbox &
+        @extend .f-box
+        @extend .f-option--wrap
+        &__unit
+          @extend .f-grid--6
 
-  &__list
-    text-align right
-    
-  &__link
-    display block
-    font-size 36px
-    font-weight 700
-    color $white-c
-    trans color
+      .no-flexbox &
+        clearfix()
+        &__unit
+          col(1/4)
 
-    &:hover
-      color $brand-c      
 
-/*----------------------------------------
-  Pre-header
-----------------------------------------*/
-.pre-header
-  fixed right left top
-  z-index: 1
-  
-  &__container
-    container()
-    hLine middle
-    text-align right
-    
-  
+    &__preview
+      $img-w = 263px
+      
+      margin-x $spacer
+      margin-bottom: ($spacer * 2)
+      width $img-w
+      cursor pointer
+      trans()
+
+      &__img-wrap
+        position relative
+        @extend .uv-icon--play
+        
+        &:before
+          ctr()
+          ctr-at 73px
+          color $white-c
+          border 2px solid @color
+          border-radius 50%
+          font-size 20px
+          trans()
+
+
+      &__caption
+        display block
+        background-color $white-c
+        color $black-c
+        font-size 13px
+        font-weight 700
+        text-transform: uppercase
+        padding 10px 15px
+        ellipsis()
+
+
+      &:hover
+        complex-transform('y', -($spacer / 2))
+
+
+      &:hover &__img-wrap:before
+        color $black-c
+        background-color $white-c
+        border-color @background-color
+
+
+
+
+
+

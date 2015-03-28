@@ -8,14 +8,25 @@ html.no-js(lang='en')
     meta(name='viewport', content='width=device-width,initial-scale=1')
     //- Modernizr
     script(src="assets/js/ua-web-challenge-modernizr.min.js")
+    // Picture element HTML5 shiv
+    script.
+      document.createElement( "picture" );
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.0/picturefill.min.js")
     //- Primary stylesheet
     link(href='assets/css/ua-web-challenge-styles.min.css', rel='stylesheet')
-    
+
+
 
   body(itemscope, itemtype='http://schema.org/WebPage')
 
     mixin buyTicketBtn(cls)
       button(class=cls) Купить билет
+
+
+    mixin picture(imgPath, extension)
+      - ext = extension || 'png'
+      picture
+        img(srcset='assets/img/#{imgPath}.#{ext}, assets/img/#{imgPath}_2x.#{ext} 2x', alt='')
 
 
     
@@ -40,8 +51,8 @@ html.no-js(lang='en')
     
     .onepage
 
-      //- section.onepage-section.s-hero.us
-      //-   .s-hero__container
+      //- .onepage-section.s-hero.us
+      //-   section.s-hero__container
       //-     header.s-hero__header
       //-       h1.s-hero__title
       //-         span.s-hero__title__font-accent IT #[br]
@@ -56,8 +67,8 @@ html.no-js(lang='en')
       //-     aside.s-hero__video
 
       
-      //- section.onepage-section.uv-section--gray
-      //-   div.s-whats-new
+      //- .onepage-section.uv-section--gray
+      //-   section.s-whats-new
       //-     header
       //-       h2.s-whats-new__title Что нового?
 
@@ -85,8 +96,8 @@ html.no-js(lang='en')
       //-           p Ранее спикеры с ними нигде не выступали. Спикеры – признанные эксперты и реальные практики
 
                 
-      //- section.onepage-section.s-for-whom
-      //-   div.s-for-whom__container.pane-1
+      //- .onepage-section.s-for-whom
+      //-   section.s-for-whom__container.pane-1
       //-     header.s-for-whom__header
       //-       h2.s-for-whom__title для кого?
 
@@ -138,10 +149,10 @@ html.no-js(lang='en')
             
 
 
-      //- section.onepage-section.s-speakers
+      //- .onepage-section.s-speakers
       //-   - speakers = ['front-end', 'back-end', 'qa', 'web-design']
 
-      //-   .s-speakers__container
+      //-   section.s-speakers__container
       //-     header
       //-       h2.s-speakers__title Спикеры
           
@@ -184,8 +195,8 @@ html.no-js(lang='en')
                   
 
 
-      //- section.onepage-section.s-program
-      //-   .uv-section__container.s-program__container
+      //- .onepage-section.s-program
+      //-   section.uv-section__container.s-program__container
       //-     header
       //-       h2.s-program__title Программа
 
@@ -235,36 +246,53 @@ html.no-js(lang='en')
       //-               span обед
 
 
-      div.onepage-section.s-pricing
+      //- div.onepage-section.s-pricing
         
-        mixin price(num1, num2)
-          b.s-pricing__type__price.early= num1
-          / с 01.03 - 
-          b.s-pricing__type__price= num2
+      //-   mixin price(num1, num2)
+      //-     b.s-pricing__type__price.early= num1
+      //-     / с 01.03 - 
+      //-     b.s-pricing__type__price= num2
 
-        - types = ['light', 'gold', 'premium']
+      //-   - types = ['light', 'gold', 'premium']
 
-        each type in types
-          section(class="s-pricing__type  #{type}")
-            div.s-pricing__type__container
-              header.s-pricing__type__header
-                h2.s-pricing__type__title #{type}
-                p лучший вариант если Вас интересует только одно направление
+      //-   each type in types
+      //-     section(class="s-pricing__type  #{type}")
+      //-       div.s-pricing__type__container
+      //-         header.s-pricing__type__header
+      //-           h2.s-pricing__type__title #{type}
+      //-           p лучший вариант если Вас интересует только одно направление
 
-              ul.s-pricing__type__list
-                li посещение 1 дня на выбор
-                li бонусный день - первый или последний на выбор
-                li раздаточный материал с доставкой
-                li запись выступлений Ваших дней
+      //-         ul.s-pricing__type__list
+      //-           li посещение 1 дня на выбор
+      //-           li бонусный день - первый или последний на выбор
+      //-           li раздаточный материал с доставкой
+      //-           li запись выступлений Ваших дней
 
-              footer.s-pricing__type__footer
-                +price(450, 550)
-                +buyTicketBtn('s-pricing__type__btn')
-
-
+      //-         footer.s-pricing__type__footer
+      //-           +price(450, 550)
+      //-           +buyTicketBtn('s-pricing__type__btn')
 
 
-      section.onepage-section 7
+
+      div.onepage-section.s-video
+        section.uv-section__container
+          header
+            h2.s-video__title Видео
+
+          ul.s-video__list
+            - i = 0
+            while i < 2
+              - i++
+              - n = 1
+              while n <= 4
+                li.s-video__list__unit
+                  figure.s-video__preview
+                    - img = 'video-preview-' + n
+                    .s-video__preview__img-wrap
+                      +picture(img)
+                    figcaption.s-video__preview__caption Jean-Baptiste Guerrax
+                - n++
+
       section.onepage-section 8
 
 

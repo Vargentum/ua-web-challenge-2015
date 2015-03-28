@@ -230,7 +230,8 @@ p-ctr()
 ctr-at($w = auto, $h = $w)
   size $w $h
   .flexbox &
-    fLine center center
+    @extend .f-box
+    @extend .f-align--2-2
 
   .no-flexbox &
     text-align center
