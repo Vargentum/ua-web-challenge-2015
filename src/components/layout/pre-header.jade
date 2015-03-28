@@ -1,9 +1,11 @@
-aside.site-pre-header
-  +buyTicketBtn('site-pre-header__btn')
+aside.site-pre-header__wrap
 
-  .site-pre-header__container
-    select
-      option(value="RU" default)
-      option(value="УК")
-      option(value="EN")
-    span.site-nav__opener
+  .site-pre-header
+
+    .site-pre-header__container
+      +buyTicketBtn('site-pre-header__btn')
+      select
+        option(value="RU" default)
+        option(value="УК")
+        option(value="EN")
+      span.site-nav__trigger

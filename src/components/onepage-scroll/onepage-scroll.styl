@@ -1,4 +1,4 @@
-$disabled = unquote('.disabled-onepage-scroll')
+$disabled-scroll = unquote('.disabled-onepage-scroll')
 
 
 body
@@ -8,7 +8,7 @@ html
   display block
   size 100%  
 
-  &{$disabled}
+  &{$disabled-scroll}
     position: inherit
 
 
@@ -22,7 +22,7 @@ html
     position: relative;
     transform-style: preserve-3d;
 
-    {$disabled} &
+    {$disabled-scroll} &
       position: inherit
       transform: none !important;
       min-height: 100%;
@@ -31,14 +31,34 @@ html
 
   &-pagination
     ctr y
-    right 10px
-    z-index: 5;
+    right 25px
+    z-index: 5
+    vLine 15px
 
-    li
-      size 5px
+    a
+      display block
+      size 10px
+      background-color $white-c
+      box-shadow 0 0 10px rgba(0, 0, 0, .2)
+      border-radius 50%
+      cursor pointer
+      trans background-color
+      pressable()
+      
+      &:hover
+      &.active
+        background-color #888
+        box-shadow none
+        
+      &:focus
+        outline none
+
+      &.active
+        cursor default
+        pressable 0
 
 
-    {$disabled} &
+    {$disabled-scroll} &
       display none   
 
 
@@ -47,7 +67,7 @@ html
     size 100%
     
 
-    {$disabled} &
+    {$disabled-scroll} &
       position: relative !important;
       top: auto !important;
       left: auto !important;

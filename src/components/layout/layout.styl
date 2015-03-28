@@ -2,13 +2,23 @@
   Pre-header
 ----------------------------------------*/
 .site-pre-header
-  fixed right left top
-  z-index: 1
+  container()
+  padding-y 10px
+  
+  &__wrap
+    fixed right left top
+    z-index: 2
   
   &__container
-    container()
-    hLine middle
-    text-align right
+
+    .flexbox &
+      @extend .f-box
+      @extend .f-gap--L
+      @extend .f-align--2-3
+
+    .no-flexbox &
+      hLine middle 10px
+      text-align right
     
 
 
@@ -16,11 +26,21 @@
   Header
 ----------------------------------------*/
 .site-header
+  prevent-flicker()
+  make-skewed-bg 325px
   position relative
   overflow hidden
   color darken($black-c, 50%)
-  prevent-flicker()
-  make-skewed-bg 325px
+  background-color #000
+  
+  //background on right
+  &:after
+    pb right top bottom
+    width 55%
+    z-index: -2
+    img('hero-bg')
+    background-size cover
+    
   
   
   &__header
@@ -78,10 +98,14 @@
   $rt-align-val = s('calc((100% - %s) / 2)', $base-max-w)
 
   absolute right top
-  width 100%
+  width calc(50% - 100px) //magic number 
+  // width 50%
   height 100%
-  background-color $black-c
   padding-right $rt-align-val
+  z-index: 1
+  trans()
+  
+
 
   .flexbox &
     @extend .f-box
@@ -90,11 +114,19 @@
   .csstransforms &
     transform translateX(100%)
     
+    &:before
+      pb left right top bottom
+      background-color $black-c
+      transform skew(-15deg)
+      transform-origin 50% 100%
+      z-index: -10
+    
     &.is-active
       transform translateX(0)
 
 
   .no-csstransforms &
+    background-color $black-c
     left 100%
     
     &.is-active
@@ -102,27 +134,43 @@
       right 0
       
 
-  &__opener
-    size 20px
-    display inline-block
-    background-color red
+  &__trigger
+    pressable()
+    @extend .uv-icon--menu-open
+    ctr-at 40px
+    background-color #191919
+    color $white-c
+    font-size 14px
     cursor pointer
+    trans color
+
+    &:hover
+      color $brand-c
+
+    &.is-active
+      @extend .uv-icon--menu-close
+      color alpha($white-c, 50%)
+
+      &:hover
+        color $white-c
+        
     
 
   &__list
     text-align right
     
+
   &__link
     display block
+    margin-bottom 10px
     font-size 36px
     font-weight 700
     color $white-c
-    trans color
+    trans()
 
     &:hover
       color $brand-c      
-
-
+      padding-right 15px    
 
 
 /*----------------------------------------
