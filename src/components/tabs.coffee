@@ -22,9 +22,15 @@ class Tabs
 
 
 
+new Tabs(
+  nav: $('.s-program__nav')
+  pane: $('.s-program__schedule')
+)
 
-###Custom Background Tabs###
-class CustomBgTabs extends Tabs
+
+
+###Tabs for section 3 (For Whom)###
+class ForWhomTabs extends Tabs
 
   constructor: (config) ->
     @container = config.container
@@ -41,7 +47,7 @@ class CustomBgTabs extends Tabs
     super(i)
 
 
-new CustomBgTabs(
+new ForWhomTabs(
   nav: $('.s-for-whom__nav__unit')
   pane: $('.s-for-whom__content__section')
   container: $('.s-for-whom__container')
@@ -49,8 +55,8 @@ new CustomBgTabs(
 
 
 
-###Tabs with sliders###
-class TabsWithSlider extends Tabs
+###Tabs for section 4 (Speakers)###
+class SpeakersTabs extends Tabs
 
   constructor: (config) ->
     @sliderConfig = config.slider.config
@@ -115,7 +121,7 @@ class TabsWithSlider extends Tabs
 
 
 
-new TabsWithSlider(
+new SpeakersTabs(
   nav: $('.s-speakers__nav__unit')
   pane: $('.s-speakers__person')
   slider: 

@@ -13,6 +13,11 @@ html.no-js(lang='en')
     
 
   body(itemscope, itemtype='http://schema.org/WebPage')
+
+    mixin buyTicketBtn(cls)
+      button(class=cls) Купить билет
+
+
     
     nav.site-nav
       ul.site-nav__list
@@ -23,7 +28,7 @@ html.no-js(lang='en')
         li#[a.site-nav__link(href="#") Главная]
 
     aside.pre-header
-      .pre-header__btn купить билет
+      +buyTicketBtn('pre-header__btn')
 
       .pre-header__container
         select
@@ -133,46 +138,132 @@ html.no-js(lang='en')
             
 
 
-      section.onepage-section.s-speakers
-        - speakers = ['front-end', 'back-end', 'qa', 'web-design']
+      //- section.onepage-section.s-speakers
+      //-   - speakers = ['front-end', 'back-end', 'qa', 'web-design']
 
-        .s-speakers__container
-          header
-            h2.s-speakers__title Спикеры
+      //-   .s-speakers__container
+      //-     header
+      //-       h2.s-speakers__title Спикеры
           
-            div.s-speakers__header
-              ul.s-speakers__nav
-                li.s-speakers__nav__unit(data-speakers-type="all") все спикеры
-                each speaker in speakers
-                  li.s-speakers__nav__unit(data-speakers-type="#{speaker}") #{speaker}
+      //-       div.s-speakers__header
+      //-         ul.s-speakers__nav
+      //-           li.s-speakers__nav__unit.is-active(data-speakers-type="all") все спикеры
+      //-           each speaker in speakers
+      //-             li.s-speakers__nav__unit(data-speakers-type="#{speaker}") #{speaker}
 
-              div.s-speakers__slider__nav
-                .s-speakers__slider__counter__wrap
-                  span.s-speakers__slider__counter.current
-                  | /
-                  span.s-speakers__slider__counter.total
-                //- dynamic arrows insertion
-                .s-speakers__slider__arrows
-                  span.s-speakers__slider__arrows__unit.prev
-                  span.s-speakers__slider__arrows__unit.next
-
-
-          ul.s-speakers__slider
-            - i = 0
-            while i < 9
-              - i++
-              each speaker in speakers
-                li.s-speakers__person(data-speakers-type='#{speaker}')
-                  img.s-speakers__person__photo(src="http://fakeimg.pl/165x170/?text=Photo", alt="")
-                  div.s-speakers__person__body
-                    h3.s-speakers__person__name #{speaker}
-                    p розработчик комплексных супер-пупер решений
+      //-         div.s-speakers__slider__nav
+      //-           .s-speakers__slider__counter__wrap
+      //-             span.s-speakers__slider__counter.current
+      //-             | /
+      //-             span.s-speakers__slider__counter.total
+      //-           //- dynamic arrows insertion
+      //-           .s-speakers__slider__arrows
+      //-             span.s-speakers__slider__arrows__unit.prev
+      //-             span.s-speakers__slider__arrows__unit.next
 
 
+      //-     ul.s-speakers__slider
+      //-       - i = 0
+      //-       while i < 9
+      //-         - i++
+      //-         each speaker in speakers
+      //-           li.uv-popup__trigger.s-speakers__person(data-speakers-type='#{speaker}')
+      //-             img.s-speakers__person__photo(src="http://fakeimg.pl/165x170/?text=Photo", alt="")
+      //-             div.uv-popup__info.s-speakers__person__body
+      //-               h3.s-speakers__person__name #{speaker}
+      //-               p розработчик комплексных супер-пупер решений
+      //-               article.uv-popup__info
+      //-                 h2 Самая ужасная вёрстка в мире: десять советов
+      //-                 p Многолетний опыт сконцентрированный в советах которым не нужно следовать ни при каких обстоятельствах. Трудно переоценить вред от этого доклада.
+                      
+      //-                 footer
+      //-                   h3 Юрий Артюх
+      //-                   p Представитель украинского крыла «Web Standards Group», совладелец учебного центра Smartme.com.ua.
+      //-                   +buyTicketBtn('s-speakers__buy-ticket-btn')
+
+                  
+
+
+      //- section.onepage-section.s-program
+      //-   .uv-section__container.s-program__container
+      //-     header
+      //-       h2.s-program__title Программа
+
+      //-     .s-program__body
+      //-       nav.s-program__nav__list
+      //-         ul
+      //-           li.s-program__nav
+      //-             time.s-program__nav__time 12.04 - 18.04
+      //-             | вся программа
+      //-           li.s-program__nav
+      //-             time.s-program__nav__time 12.04 - 18.04
+      //-             | вся программа
+      //-           li.s-program__nav
+      //-             time.s-program__nav__time 12.04 - 18.04
+      //-             | вся программа
+      //-           li.s-program__nav
+      //-             time.s-program__nav__time 12.04 - 18.04
+      //-             | вся программа
+      //-           li.s-program__nav
+      //-             time.s-program__nav__time 12.04 - 18.04
+      //-             | вся программа
+      //-           li.s-program__nav
+      //-             time.s-program__nav__time 12.04 - 18.04
+      //-             | вся программа
+      //-           li.s-program__nav
+      //-             time.s-program__nav__time 12.04 - 18.04
+      //-             | вся программа
+      //-           li.s-program__nav
+      //-             time.s-program__nav__time 12.04 - 18.04
+      //-             | вся программа
+
+
+      //-       ul.s-program__schedule
+      //-         - i = 0
+      //-         while i < 7
+      //-           - i++
+      //-           li
+      //-             article.s-program__schedule__unit
+      //-               header.s-program__schedule__unit__header
+      //-                 time 09:00-10:00
+      //-                 h3 Александр Трегуб
+      //-               p Место юзабилити в процессе разработки. Мечты и реалии 
+      //-           if i == 3
+      //-             li.s-program__schedule__unit--dinner
+      //-               time 13:00-14:00
+      //-               i.s-program__schedule__unit--dinner__icon
+      //-               span обед
+
+
+      div.onepage-section.s-pricing
         
+        mixin price(num1, num2)
+          b.s-pricing__type__price.early= num1
+          / с 01.03 - 
+          b.s-pricing__type__price= num2
 
-      section.onepage-section 5
-      section.onepage-section 6
+        - types = ['light', 'gold', 'premium']
+
+        each type in types
+          section(class="s-pricing__type  #{type}")
+            div.s-pricing__type__container
+              header.s-pricing__type__header
+                h2.s-pricing__type__title #{type}
+                p лучший вариант если Вас интересует только одно направление
+
+              ul.s-pricing__type__list
+                li посещение 1 дня на выбор
+                li бонусный день - первый или последний на выбор
+                li раздаточный материал с доставкой
+                li запись выступлений Ваших дней
+
+              footer.s-pricing__type__footer
+                +price(450, 550)
+                +buyTicketBtn('s-pricing__type__btn')
+
+
+
+
       section.onepage-section 7
       section.onepage-section 8
 

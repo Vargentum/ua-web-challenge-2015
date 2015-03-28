@@ -20,14 +20,15 @@ padding-x()
 padding-y()
   -xy(padding-top, padding-bottom, arguments)
   
-/* works fine with border() mixin */
+/* you have to pass multiple arguments as single string
+  border-x unquote('4px solid red')
+  border-y s('4px solid %s', $black-c)
+ */
 border-x()
-  if arguments == none
-    -xy(border-right, border-left, arguments)
+  -xy(border-right, border-left, arguments)
 
 border-y()
-  if arguments == none
-   -xy(border-top, border-bottom, arguments)
+ -xy(border-top, border-bottom, arguments)
 
 
 /*--------------------------------------
@@ -404,7 +405,7 @@ complex-transform($dir, $val)
   Transform helper
   works only with px
 --------------------------------------*/
-complex-gap($prop, $val, $val-fallback)
+complex-vunit($prop, $val, $val-fallback)
   if unit($val) is 'vw'
     .cssvwunit &
       {$prop}: $val
@@ -416,3 +417,11 @@ complex-gap($prop, $val, $val-fallback)
       {$prop}: $val
     .no-cssvhunit &
       {$prop}: $val-fallback
+      
+
+
+
+
+handle-negative-z-index($pos = relative)
+  position $pos
+  z-index: 1

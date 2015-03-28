@@ -10,6 +10,22 @@ make-skewed-bg(x)
     backface-visibility hidden
     z-index: -1
 
+
+/*----------------------------------------
+  Bullit list constructor
+----------------------------------------*/
+make-bullit-list($clr = $black-c)
+  &>*
+    position relative
+    padding-left 20px
+    
+    &:before
+      absolute left top 1px
+      content '•'
+      color $clr
+      
+
+
 /*----------------------------------------
   Typography
 ----------------------------------------*/
@@ -28,70 +44,91 @@ make-skewed-bg(x)
     font-style italic
     
   ul
-    
-    li
-      position relative
-      padding-left 20px
-      
-      &:before
-        absolute left top 1px
-        content '•'
-        color $brand-c
+    make-bullit-list $brand-c
       
   
 
 /*----------------------------------------
   Button
 ----------------------------------------*/
-
-make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
+.uv-btn
   pressable()
   size 100% $h
-  color $clr
-  border $brd solid $clr
-  font-size: $fz
+  height 50px
+  border-size 3px
+  border-style solid
+  padding 0
+  font-size: 13px
   font-weight 900
   text-align center
   text-transform: uppercase
   cursor pointer
   overflow hidden
   trans color
-  
+
   &:focus
     outline none
     
-  &:hover
-    color $white-c
-  
   .csstransforms &
     &:before
       pb left top
       size 100%
       trans transform
       transform rotateY(90deg) skew(45deg)
-      background-color $clr
       backface-visibility hidden
       z-index: -1
       
     &:hover:before
       transform rotateY(0) skew(45deg)
+      
+  
 
-      
-  .no-csstransforms &
+  -theme($def-c,$hov-c)
+    color $def-c
+    border-color $def-c
+
     &:hover
-      background-color $clr
-      
+      color $hov-c
+
+    .csstransforms &
+      &:before
+        background-color $def-c
+        
+    .no-csstransforms &
+      &:hover
+        background-color $hov-c
+    
+
+  //default theme: black-n-white
+  -theme($black-c,$white-c)
+  
+  &--brand-n-black
+    -theme($brand-c,$black-c)
+    
+  &--white-n-black
+    -theme($white-c,$black-c)
 
 /*----------------------------------------
   Sections
 ----------------------------------------*/
 .uv-section
   
+  // can't extend parent dependency
+  &__container
+    container()
+    height 100%
+    .flexbox &
+      @extend .f-box
+      @extend .f-dir--col
+      @extend .f-align--13-2
+
+
   $types = 'gray' 'white' 'brand' 'black'
   
   for $type in $types
     &--{unquote($type)}
       background-color lookup('$' + $type + '-c')
+
 
 
   &__title
@@ -103,13 +140,13 @@ make-btn($h = 50px, $clr = $base-font-c, $brd = 3px, $fz = 13px)
     &--white
       color $white-c
 
-
+  
 
 /*----------------------------------------
   Nav unit constructor
 ----------------------------------------*/
-make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
-  width: $unit-w
+make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c = null)
+  width: 165px
   position relative
   overflow hidden
   color $def-text-c
@@ -132,7 +169,10 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
   &:hover
     .csstransforms &
       &:before
-        background-color $hov-badge-c
+        if $hov-badge-c isnt null
+          background-color $hov-badge-c
+        else
+          background-color $act-badge-c
     .no-csstransforms &
       color $hov-text-c
 
@@ -144,11 +184,11 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
     
     .csstransforms &
       &:before
-        background-color $hov-badge-c
+        background-color $act-badge-c
         transform translateY(0)
     
     .no-csstransforms &
-      background-color $hov-badge-c
+      background-color $act-badge-c
 
 
 
@@ -171,11 +211,9 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
     
 
     &__container
-      container()
-      height 100%
+      @extend .uv-section__container
       
       .flexbox &
-        @extend .f-box
         @extend .f-align--13-13
       
     
@@ -212,7 +250,10 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
       
 
     &__btn
-      make-btn 70px $hero-font-c 6px 13px
+      @extend .uv-btn
+      @extend .uv-btn
+      border-width 6px
+      height 70px
       margin-y 60px
       
 
@@ -236,7 +277,7 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
     
     &__title
       @extend .uv-section__title
-      complex-gap(margin-bottom, 15vh, 100px)
+      complex-vunit(margin-bottom, 15vh, 100px)
     
 
     &__article
@@ -245,7 +286,7 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
       position relative
       padding-left 85px
       font-weight 300
-      complex-gap(margin-bottom, 10vh, 50px)
+      complex-vunit(margin-bottom, 10vh, 50px)
 
       .flexbox &
         @extend .f-grid--11
@@ -298,8 +339,7 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
     
 
     &__container
-      height inherit
-      container()
+      @extend .uv-section__container
       
       for $i in 1..$sections-quantity
         &.pane-{$i}:before
@@ -328,7 +368,7 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
 
     &__title
       @extend .uv-section__title
-      complex-gap(margin-bottom, 5vh, 50px)
+      complex-vunit(margin-bottom, 5vh, 50px)
       
 
     &__nav
@@ -398,11 +438,9 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
     background-color $bg-c
 
     &__container
-      container()
-      height 100%
+      @extend .uv-section__container
       
       .flexbox &
-        @extend .f-box
         @extend .f-dir--col
         @extend .f-align--13-2
    
@@ -410,11 +448,11 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
     &__title
       @extend .uv-section__title
       @extend .uv-section__title--white
-      complex-gap(margin-bottom, 5vh, 50px)
+      complex-vunit(margin-bottom, 5vh, 50px)
 
 
     &__header
-      complex-gap(margin-bottom, 3vh, 30px)
+      complex-vunit(margin-bottom, 3vh, 30px)
       margin-x 25px 15px  //equal incorrect slider centering
       
       .flexbox &
@@ -425,10 +463,9 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
 
 
     &__nav
+      handle-negative-z-index()
       hLine bottom $unit-gap
       max-width ($unit-w + $unit-gap) * 6
-      position relative 
-      z-index: 1
 
       &__unit
         width: $unit-w
@@ -540,6 +577,282 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $hov-badge-c)
           font-size 14px
           font-weight 700
           text-transform uppercase
+
+
+  /*----------------------------------------
+    Program (section 5)
+  ----------------------------------------*/
+  &-program
+    @extend .uv-section--gray
+    
+    &__container
+      // @extend .uv-section__container
+    
+    &__title
+      @extend .uv-section__title
+      complex-vunit(margin-bottom, 5vh, 50px)
+      
+
+    &__body
+      .flexbox &
+        @extend .f-box
+        @extend .f-align--13-3
+      .no-flexbox &
+        jLine()
+
+
+    &__nav
+      make-nav-unit($black-c, $white-c, $black-c, $black-c, $white-c)
+      padding-y 20px
+      
+      &:hover:before
+        background-color $white-c
+      
+      &__time
+        display block
+        color #888
+        margin-bottom 3px
+
+      
+      &__list
+        complex-vunit(margin-right, 10vw, 150px)
+        handle-negative-z-index()
+        width 165px
+
+
+    &__schedule
+      
+      .flexbox &
+        @extend .f-fill
+      .no-flexbox &
+        width 70%
+
+      &__unit
+        $border-c = #c8c8c8
+        trans()
+        position relative
+        cursor pointer
+        border-bottom 1px solid $border-c
+        padding-y 15px
+        padding-right 50px
+        font-size 20px
+        font-weight 200
+        
+        &>*
+          position relative //disable overlapping by :before
+        
+        //hover background
+        $gap-x = 20px
+        $gap-y = 1px
+        &:before
+          pb()
+          top -($gap-y)
+          bottom -($gap-y) 
+          left -($gap-x)
+          right -($gap-x)
+          trans opacity
+          opacity 0
+          background-color $white-c
+          box-shadow 0 0 10px rgba(0, 0, 0, 0.1)
+        
+
+        //sign on right
+        $primary-c = #3c3c3c
+        $secondary-c = $white-c
+        $size = 26px
+        &:after
+          p-ctr y
+          content '+'
+          right 0
+          size $size
+          line-height: ($size - 1px)
+          text-align center
+          background-color $primary-c
+          border 2px solid $primary-c
+          color $secondary-c
+          font-weight 300
+          font-size 23px
+          trans()
+
+
+        &:hover
+          &:before
+            opacity 1
+            
+          &:after
+            background-color $secondary-c
+            color $primary-c
+            
+
+            
+        &:hover  &__header>*:before
+          background-color $gray-c
+        
+
+
+        &__header
+          $spacer = 25px
+          
+          hLine baseline $spacer
+          margin-bottom 5px
+          font-size 12px
+          color $black-c
+          font-weight 700
+          text-transform uppercase
+
+          //divider
+          &>*
+            position relative
+            &:before
+              $size = 6px
+              pb top 4px
+              left -($spacer / 2) - ($size / 2)
+              size $size
+              background-color $white-c
+              border-radius 50%
+              trans background-color
+              
+              
+            &:first-child:before
+              display none
+
+        
+        &--dinner
+          hLine middle ($spacer / 2)
+          border-y s('4px solid %s', $black-c)
+          padding-y 10px
+          font-size 12px
+          color $black-c
+          font-weight 700
+          text-transform uppercase
+          
+          &__icon
+            @extend .uv-icon--dinner
+            color darken($gray-c, 50%)
+    
+
+
+  
+  /*----------------------------------------
+    Pricing (section 6)
+  ----------------------------------------*/
+  &-pricing
+    .flexbox &
+      @extend .f-box
+      
+
+    $section = unquote('.s-pricing__type')
+    $light-c = $gray-c //don't reorder with $gray-c at 731 line
+    $gold-c = $brand-c
+    $premium-c = $black-c
+        
+      
+    &__type
+      test()
+      $gray-c = #888
+
+      .flexbox &
+        @extend .f-box
+        @extend .f-dir--col
+        @extend .f-align--13-2
+        width (100% / 3)
+
+      .no-flexbox &
+        span(1/3)      
+      
+
+      //icon
+      &:before
+        content ''
+        display block
+        margin-x auto
+        complex-vunit(margin-bottom, 3vh, 30px)
+
+
+      $types = 'light' 'gold' 'premium'
+      
+      for $type in $types
+        &.{unquote($type)}
+          background-color lookup('$' + $type + '-c')
+          &:before
+            sprite-retina lookup('$pricing-' + $type)
+                
+
+      
+      &__container
+        backface-visibility hidden
+        container 60%
+        font-weight 200
+        font-size 16px
+        
+    
+      &__header
+        color $gray-c
+        complex-vunit(margin-bottom, 3vh, 30px)
+
+
+      &__title
+        color $black-c
+        font-size 36px
+        font-weight 900
+        text-align center
+        complex-vunit(margin-bottom, 3vh, 30px)
+        text-transform: capitalize
+   
+
+      &__list
+        make-bullit-list $black-c
+        vLine 10px
+        
+
+      $footer-fz = 14px
+      
+      &__footer
+        complex-vunit(margin-top, 15vh, 135px)
+        font-size $footer-fz
+        color $gray-c
+
+
+      &__price
+        font-size 24px
+        &:after
+          content 'грн'
+          margin-x 4px
+          font-size $footer-fz
+        
+        &.early
+          color $black-c
+
+
+      &__btn
+        @extend .uv-btn
+        border-width 4px
+        margin-top 10px
+        
+
+
+      //improvements for black section
+      &.premium
+        color #999
+        
+
+      &.premium  &__header
+        color inherit
+
+      &.premium  &__title
+        color $brand-c
+        
+      &.premium  &__list
+        make-bullit-list $brand-c
+
+      &.premium  &__footer
+        color #555
+
+      &.premium  &__price.early
+        color #e9e9e9
+
+      &.premium  &__btn
+        @extend .uv-btn--brand-n-black
 
 
 /*----------------------------------------
