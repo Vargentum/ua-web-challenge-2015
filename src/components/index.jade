@@ -1,47 +1,19 @@
-doctype html
-<!--[if IE 8]> <html class="ie ie8" lang="en"> <![endif]-->
-<!--[if IE 9]> <html class="ie ie9" lang="en"> <![endif]-->
-html.no-js(lang='en')
-
-  head
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width,initial-scale=1')
-    //- Modernizr
-    script(src="assets/js/ua-web-challenge-modernizr.min.js")
-    // Picture element HTML5 shiv
-    script.
-      document.createElement( "picture" );
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.0/picturefill.min.js")
-    //- Primary stylesheet
-    link(href='assets/css/ua-web-challenge-styles.min.css', rel='stylesheet')
-
-  
-
-  body(itemscope, itemtype='http://schema.org/WebPage')
-
-    include ./unsorted/mixins.jade
-    
-    include ./layout/pre-header.jade
-    include ./layout/nav.jade
-  
-    
-    .onepage
-
-      include ./layout/header.jade
-      include ./sections/section-whats-new.jade
-      include ./sections/section-for-whom.jade
-      include ./sections/section-speakers.jade
-      include ./sections/section-program.jade
-      include ./sections/section-pricing.jade
-      include ./sections/section-video.jade
-      //footer is in this section
-      include ./sections/section-partners.jade
+extends ./layout/base.jade
 
 
+block content
 
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
-    script(src='assets/js/ua-web-challenge-plugins.js')
-    script(src='assets/js/ua-web-challenge-scripts.js')
-    // script(src='assets/js/ua-web-challenge-plugins.min.js')
-    // script(src='assets/js/ua-web-challenge-scripts.min.js')
+  .onepage
+
+    include ./layout/header.jade
+    include ./sections/section-whats-new.jade
+    include ./sections/section-for-whom.jade
+    include ./sections/section-speakers.jade
+    include ./sections/section-program.jade
+    include ./sections/section-pricing.jade
+    include ./sections/section-video.jade
+    //footer is in this section
+    include ./sections/section-partners.jade
+
+
 
