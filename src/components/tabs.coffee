@@ -10,21 +10,29 @@ class Tabs
   switch: (i) =>
     @pane.removeClass @activeCls
     $(@pane[i]).addClass @activeCls
-    console.log($(@pane[i]))
 
     @nav.removeClass @activeCls
     $(@nav[i]).addClass @activeCls
+    return
 
 
   init: =>
     @nav.click (event) =>
-      @switch( $(event.target).index() )
+      $current = $(event.target)
+      if not $current.hasClass @activeCls
+        @switch( $current.index() )
 
 
 
 new Tabs(
   nav: $('.s-program__nav')
   pane: $('.s-program__schedule')
+)
+
+
+new Tabs(
+  nav: $('.s-partners__nav__unit')
+  pane: $('.s-partners__category')
 )
 
 

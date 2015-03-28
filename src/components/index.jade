@@ -25,7 +25,7 @@ html.no-js(lang='en')
 
     mixin picture(imgPath, extension)
       - ext = extension || 'png'
-      picture
+      picture(class!=attributes.class)
         img(srcset='assets/img/#{imgPath}.#{ext}, assets/img/#{imgPath}_2x.#{ext} 2x', alt='')
 
 
@@ -274,26 +274,83 @@ html.no-js(lang='en')
 
 
 
-      div.onepage-section.s-video
+      //- div.onepage-section.s-video
+      //-   section.uv-section__container
+      //-     header
+      //-       h2.s-video__title Видео
+
+      //-     ul.s-video__list
+      //-       - i = 0
+      //-       while i < 2
+      //-         - i++
+      //-         - n = 1
+      //-         while n <= 4
+      //-           li.s-video__list__unit
+      //-             figure.s-video__preview
+      //-               - img = 'video-preview-' + n
+      //-               .s-video__preview__img-wrap
+      //-                 +picture(img)
+      //-               figcaption.s-video__preview__caption Jean-Baptiste Guerrax
+      //-           - n++
+
+
+
+
+      .onepage-section.s-partners
         section.uv-section__container
           header
-            h2.s-video__title Видео
+            h2.s-partners__title Партнеры
 
-          ul.s-video__list
-            - i = 0
-            while i < 2
-              - i++
-              - n = 1
-              while n <= 4
-                li.s-video__list__unit
-                  figure.s-video__preview
-                    - img = 'video-preview-' + n
-                    .s-video__preview__img-wrap
-                      +picture(img)
-                    figcaption.s-video__preview__caption Jean-Baptiste Guerrax
-                - n++
+          ul.s-partners__nav
+            li.s-partners__nav__unit.is-active партнеры
+            li.s-partners__nav__unit инфо-партнеры
 
-      section.onepage-section 8
+          ul
+            li.s-partners__category.is-active
+              ul.s-partners__category__list
+                - i = 0
+                while i < 2
+                  - i++
+                  
+                  if i == 1
+                    li 
+                      h3.s-partners__logo--general__caption генеральный партнер
+                      a.s-partners__logo.s-partners__logo--general(href="http://google.com/", target="_blank")
+                        figure
+                          +picture('partners/cat-1/partner-general')(class="s-partners__logo__img")
+                          figcaption.is-hidden Kikstarter
+                  - n = 0
+                  while n < 3
+                    - n++
+                    li
+                      a.s-partners__logo(href="http://google.com/", target="_blank")
+                        figure
+                          - imgPath = 'partners/cat-1/partner-' + n
+                          +picture(imgPath)(class="s-partners__logo__img")
+                          figcaption.is-hidden Wargaming
+
+            li.s-partners__category
+              ul.s-partners__category__list
+                - i = 0
+                while i < 2
+                  - i++
+                  
+                  if i == 2
+                    li 
+                      h3.s-partners__logo--general__caption генеральный партнер
+                      a.s-partners__logo.s-partners__logo--general(href="http://google.com/", target="_blank")
+                        figure
+                          +picture('partners/cat-1/partner-general')(class="s-partners__logo__img")
+                          figcaption.is-hidden Kikstarter
+                  - n = 0
+                  while n < 3
+                    - n++
+                    li
+                      a.s-partners__logo(href="http://google.com/", target="_blank")
+                        figure
+                          - imgPath = 'partners/cat-2/partner-' + n
+                          +picture(imgPath)(class="s-partners__logo__img")
+                          figcaption.is-hidden Wargaming
 
 
 

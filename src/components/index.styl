@@ -208,27 +208,52 @@ make-bullit-list($clr = $black-c)
   
 
 /*----------------------------------------
-  Nav unit constructor
+  Nav component
 ----------------------------------------*/
-make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c = null)
-  width: 165px
+$nav = unquote('.uv-nav')
+.uv-nav
   position relative
-  overflow hidden
+  z-index: 1
+  
+
+  &--horisontal
+    hLine bottom $unit-gap
+    
+
+  &__unit
+    width: 165px
+    position relative
+    overflow hidden
+    font-size 14px
+    line-height: 1
+    font-weight 700
+    text-transform uppercase
+    trans()
+    cursor pointer
+
+    .csstransforms &
+      &:before
+        trans()
+        pb left right top bottom
+        transform translateY(calc(100% \- 5px))
+        z-index: -1
+   
+
+    &.is-active
+      cursor default
+      padding-left 10px
+      
+      .csstransforms &
+        &:before
+          transform translateY(0)
+
+
+-set-nav-theme($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c = null)
   color $def-text-c
-  font-size 14px
-  line-height: 1
-  font-weight 700
-  text-transform uppercase
-  trans()
-  cursor pointer
 
   .csstransforms &
     &:before
-      trans()
-      pb left right top bottom
       background-color $def-badge-c
-      transform translateY(calc(100% \- 5px))
-      z-index: -1
  
 
   &:hover
@@ -244,13 +269,10 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
 
   &.is-active
     color $hov-text-c
-    cursor default
-    padding-left 10px
     
     .csstransforms &
       &:before
         background-color $act-badge-c
-        transform translateY(0)
     
     .no-csstransforms &
       background-color $act-badge-c
@@ -438,9 +460,11 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
 
     &__nav
       width 200px
+      @extend .uv-nav
 
       &__unit
-        make-nav-unit($black-c,$white-c,$black-c,$black-c)
+        @extend .uv-nav__unit
+        -set-nav-theme($black-c,$white-c,$black-c,$black-c)
           
         .flexbox &
           height 10vh
@@ -491,9 +515,7 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
     Speakers (section 4)
   ----------------------------------------*/
   &-speakers
-    $unit-w = 165px
     $unit-h = 275px
-    $unit-gap = 30px
 
     $unit-photo-h = 170px
     
@@ -528,13 +550,13 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
 
 
     &__nav
-      handle-negative-z-index()
-      hLine bottom $unit-gap
+      @extend .uv-nav
+      @extend .uv-nav--horisontal
       max-width ($unit-w + $unit-gap) * 6
 
       &__unit
-        width: $unit-w
-        make-nav-unit($white-c, $black-c, $contrast-c, $white-c)
+        @extend .uv-nav__unit
+        -set-nav-theme($white-c, $black-c, $contrast-c, $white-c)
 
         .flexbox &
           @extend .f-line
@@ -667,7 +689,8 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
 
 
     &__nav
-      make-nav-unit($black-c, $white-c, $black-c, $black-c, $white-c)
+      @extend .uv-nav__unit
+      -set-nav-theme($black-c, $white-c, $black-c, $black-c, $white-c)
       padding-y 20px
       
       &:hover:before
@@ -680,8 +703,8 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
 
       
       &__list
+        @extend .uv-nav
         complex-vunit(margin-right, 10vw, 150px)
-        handle-negative-z-index()
         width 165px
 
 
@@ -870,7 +893,7 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
       $footer-fz = 14px
       
       &__footer
-        complex-vunit(margin-top, 15vh, 135px)
+        complex-vunit(margin-top, 15vh, $unit-w)
         font-size $footer-fz
         color $gray-c
 
@@ -993,5 +1016,62 @@ make-nav-unit($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c
 
 
 
+  /*----------------------------------------
+    video (section 8)
+  ----------------------------------------*/
+  &-partners
+    @extend .uv-section--gray
+
+    
+    &__title
+      @extend .uv-section__title
+      complex-vunit(margin-bottom, 5vh, 50px)
+
+
+    &__nav
+      @extend .uv-nav
+      @extend .uv-nav--horisontal
+      complex-vunit(margin-bottom, 3vh, 30px)
+      
+
+      &__unit
+        @extend .uv-nav__unit
+        -set-nav-theme($black-c, $white-c, $black-c, $black-c, $white-c)
+        padding-y 20px
+
+
+    &__category
+      display none
+      
+      &.is-active
+        display block
+
+      
+      &__list
+        @extend .uv-nav--horisontal
+      
+      
+    &__logo
+      margin-top: $unit-gap
+      ctr-at $unit-w
+      background-color $white-c
+      trans()
+      cursor pointer
+
+      &:hover
+        box-shadow 0 0 10px rgba(0, 0, 0, .25)
+        complex-transform('y', -($unit-gap / 2.5))
+
+
+      &--general
+        width ($unit-w * 2 + $unit-gap)
+
+        &__caption
+          relative top ($unit-gap / 1.5)
+          color darken($gray-c, 25%)
+          text-transform: uppercase
+          font-size 11px
+          font-weight 700
+          
 
 
