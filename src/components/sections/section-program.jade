@@ -1,0 +1,49 @@
+.onepage-section.s-program
+  section.uv-section__container.s-program__container
+    header
+      h2.s-program__title Программа
+
+    .s-program__body
+      nav.s-program__nav__list
+        ul
+          li.s-program__nav
+            time.s-program__nav__time 12.04 - 18.04
+            | вся программа
+          li.s-program__nav
+            time.s-program__nav__time 12.04 - 18.04
+            | вся программа
+          li.s-program__nav
+            time.s-program__nav__time 12.04 - 18.04
+            | вся программа
+          li.s-program__nav
+            time.s-program__nav__time 12.04 - 18.04
+            | вся программа
+          li.s-program__nav
+            time.s-program__nav__time 12.04 - 18.04
+            | вся программа
+          li.s-program__nav
+            time.s-program__nav__time 12.04 - 18.04
+            | вся программа
+          li.s-program__nav
+            time.s-program__nav__time 12.04 - 18.04
+            | вся программа
+          li.s-program__nav
+            time.s-program__nav__time 12.04 - 18.04
+            | вся программа
+
+
+      ul.s-program__schedule
+        - i = 0
+        while i < 7
+          - i++
+          li
+            article.s-program__schedule__unit
+              header.s-program__schedule__unit__header
+                time 09:00-10:00
+                h3 Александр Трегуб
+              p Место юзабилити в процессе разработки. Мечты и реалии 
+          if i == 3
+            li.s-program__schedule__unit--dinner
+              time 13:00-14:00
+              i.s-program__schedule__unit--dinner__icon
+              span обед

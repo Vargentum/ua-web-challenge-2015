@@ -1,0 +1,223 @@
+/*--------------------------------------
+  Some useful utility classes
+--------------------------------------*/
+$hLine-cases = '1'  top
+              ,'2'  middle
+              ,'21' baseline
+              ,'3'  bottom
+
+.l-hLine
+  hLine()
+
+for $each in $hLine-cases
+  .l-hLine--{unquote($each[0])}
+    hLine($each[1])
+
+
+.l-container
+  container()
+
+
+.hide-text,
+.text-hide
+  hide-text()
+
+
+.is-shown
+  visibility visible !important
+  position relative !important
+
+.is-hidden
+  visibility hidden !important
+  position absolute !important
+
+
+
+
+/*----------------------------------------
+  Typography
+----------------------------------------*/
+.uv-typography
+  font-size 18px
+  font-weight 300
+
+  h4,ul,li,p
+    margin-bottom 5px
+  
+  h4
+    font-weight 700
+    line-height 22px
+
+  i
+    font-style italic
+    
+  ul
+    make-bullit-list $brand-c
+      
+  
+
+/*----------------------------------------
+  Button
+----------------------------------------*/
+.uv-btn
+  pressable()
+  size 100% $h
+  height 50px
+  border-size 3px
+  border-style solid
+  padding 0
+  font-size: 13px
+  font-weight 900
+  text-align center
+  text-transform: uppercase
+  cursor pointer
+  overflow hidden
+  trans color
+
+  &:focus
+    outline none
+    
+  .csstransforms &
+    &:before
+      pb left top
+      size 100%
+      trans transform
+      transform rotateY(90deg) skew(45deg)
+      backface-visibility hidden
+      z-index: -1
+      
+    &:hover:before
+      transform rotateY(0) skew(45deg)
+      
+  
+
+  -theme($def-c,$hov-c)
+    color $def-c
+    border-color $def-c
+
+    &:hover
+      color $hov-c
+
+    .csstransforms &
+      &:before
+        background-color $def-c
+        
+    .no-csstransforms &
+      &:hover
+        background-color $hov-c
+    
+
+  //default theme: black-n-white
+  -theme($black-c,$white-c)
+  
+  &--brand-n-black
+    -theme($brand-c,$black-c)
+    
+  &--white-n-black
+    -theme($white-c,$black-c)
+
+/*----------------------------------------
+  Sections
+----------------------------------------*/
+.uv-section
+  
+  // can't extend parent dependency
+  &__container
+    container()
+    height 100%
+    .flexbox &
+      @extend .f-box
+      @extend .f-dir--col
+      @extend .f-align--13-2
+
+
+  $types = 'gray' 'white' 'brand' 'black'
+  
+  for $type in $types
+    &--{unquote($type)}
+      background-color lookup('$' + $type + '-c')
+
+
+
+  &__title
+    color $black-c
+    font-size 48px
+    font-weight 900
+    text-transform uppercase
+    
+    &--white
+      color $white-c
+
+  
+
+/*----------------------------------------
+  Nav component
+----------------------------------------*/
+$nav = unquote('.uv-nav')
+.uv-nav
+  position relative
+  z-index: 1
+  
+
+  &--horisontal
+    hLine bottom $unit-gap
+    
+
+  &__unit
+    width: 165px
+    position relative
+    overflow hidden
+    font-size 14px
+    line-height: 1
+    font-weight 700
+    text-transform uppercase
+    trans()
+    cursor pointer
+
+    .csstransforms &
+      &:before
+        trans()
+        pb left right top bottom
+        transform translateY(calc(100% \- 5px))
+        z-index: -1
+   
+
+    &.is-active
+      cursor default
+      padding-left 10px
+      
+      .csstransforms &
+        &:before
+          transform translateY(0)
+
+
+-set-nav-theme($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c = null)
+  color $def-text-c
+
+  .csstransforms &
+    &:before
+      background-color $def-badge-c
+ 
+
+  &:hover
+    .csstransforms &
+      &:before
+        if $hov-badge-c isnt null
+          background-color $hov-badge-c
+        else
+          background-color $act-badge-c
+    .no-csstransforms &
+      color $hov-text-c
+
+
+  &.is-active
+    color $hov-text-c
+    
+    .csstransforms &
+      &:before
+        background-color $act-badge-c
+    
+    .no-csstransforms &
+      background-color $act-badge-c
+
+

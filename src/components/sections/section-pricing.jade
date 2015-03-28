@@ -1,0 +1,25 @@
+.onepage-section.s-pricing
+      
+  mixin price(num1, num2)
+    b.s-pricing__type__price.early= num1
+    / с 01.03 - 
+    b.s-pricing__type__price= num2
+
+  - types = ['light', 'gold', 'premium']
+
+  each type in types
+    section(class="s-pricing__type  #{type}")
+      div.s-pricing__type__container
+        header.s-pricing__type__header
+          h2.s-pricing__type__title #{type}
+          p лучший вариант если Вас интересует только одно направление
+
+        ul.s-pricing__type__list
+          li посещение 1 дня на выбор
+          li бонусный день - первый или последний на выбор
+          li раздаточный материал с доставкой
+          li запись выступлений Ваших дней
+
+        footer.s-pricing__type__footer
+          +price(450, 550)
+          +buyTicketBtn('s-pricing__type__btn')

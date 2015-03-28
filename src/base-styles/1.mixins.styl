@@ -381,30 +381,8 @@ show-as()
   display arguments !important
 
 
-
 /*--------------------------------------
-  Transform helper
-  works only with px
---------------------------------------*/
-complex-transform($dir, $val)
-  if $dir is 'x'
-    .csstransforms &
-      transform translateX($val)
-    if unit($val) isnt '%'
-      .no-csstransforms &
-        margin-left: $val
-      
-  if $dir is 'y'
-    .csstransforms &
-      transform translateY($val)
-    if unit($val) isnt '%'
-      .no-csstransforms &
-        margin-top: $val
-
-
-/*--------------------------------------
-  Transform helper
-  works only with px
+  Transform helper (works only with px)
 --------------------------------------*/
 complex-vunit($prop, $val, $val-fallback)
   if unit($val) is 'vw'
@@ -420,9 +398,47 @@ complex-vunit($prop, $val, $val-fallback)
       {$prop}: $val-fallback
       
 
+/*----------------------------------------
+  Skewed backgrounds constructor
+----------------------------------------*/
+make-skewed-bg(x)
+  transform: translate3d(0,0,0);
+  &:before
+    pb top left -50%
+    left s('calc(-50% + %s)', x)
+    size 100%
+    transform skew(-15deg)
+    transform-origin 0 0
+    background-color $brand-c
+    backface-visibility hidden
+    z-index: -1
 
 
+/*----------------------------------------
+  Bullit list constructor
+----------------------------------------*/
+make-bullit-list($clr = $black-c)
+  &>*
+    position relative
+    padding-left 20px
+    
+    &:before
+      absolute left top 1px
+      content '•'
+      color $clr
+      
 
+
+/*----------------------------------------
+  Restore negative z-index visibility
+----------------------------------------*/
 handle-negative-z-index($pos = relative)
   position $pos
   z-index: 1
+
+
+/*----------------------------------------
+  Add hardware acceleration to prevent animation flicking
+----------------------------------------*/
+prevent-flicker()
+  transform: translate3d(0,0,0) 

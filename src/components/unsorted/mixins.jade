@@ -1,0 +1,10 @@
+mixin buyTicketBtn(cls)
+  button(class=cls) Купить билет
+
+
+mixin picture(imgPath, extension)
+  - ext = extension || 'png'
+  picture(class!=attributes.class)
+    img(srcset='assets/img/#{imgPath}.#{ext}, assets/img/#{imgPath}_2x.#{ext} 2x', alt='')
+
+

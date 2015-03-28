@@ -1,0 +1,42 @@
+.onepage-section.s-speakers
+  - speakers = ['front-end', 'back-end', 'qa', 'web-design']
+
+  section.uv-section__container
+    header
+      h2.s-speakers__title Спикеры
+    
+      div.s-speakers__header
+        ul.s-speakers__nav
+          li.s-speakers__nav__unit.is-active(data-speakers-type="all") все спикеры
+          each speaker in speakers
+            li.s-speakers__nav__unit(data-speakers-type="#{speaker}") #{speaker}
+
+        div.s-speakers__slider__nav
+          .s-speakers__slider__counter__wrap
+            span.s-speakers__slider__counter.current
+            | /
+            span.s-speakers__slider__counter.total
+          //- dynamic arrows insertion
+          .s-speakers__slider__arrows
+            span.s-speakers__slider__arrows__unit.prev
+            span.s-speakers__slider__arrows__unit.next
+
+
+    ul.s-speakers__slider
+      - i = 0
+      while i < 9
+        - i++
+        each speaker in speakers
+          li.uv-popup__trigger.s-speakers__person(data-speakers-type='#{speaker}')
+            img.s-speakers__person__photo(src="http://fakeimg.pl/165x170/?text=Photo", alt="")
+            div.uv-popup__info.s-speakers__person__body
+              h3.s-speakers__person__name #{speaker}
+              p розработчик комплексных супер-пупер решений
+              article.uv-popup__info
+                h2 Самая ужасная вёрстка в мире: десять советов
+                p Многолетний опыт сконцентрированный в советах которым не нужно следовать ни при каких обстоятельствах. Трудно переоценить вред от этого доклада.
+                
+                footer
+                  h3 Юрий Артюх
+                  p Представитель украинского крыла «Web Standards Group», совладелец учебного центра Smartme.com.ua.
+                  +buyTicketBtn('s-speakers__buy-ticket-btn')

@@ -1,356 +1,11 @@
 /*----------------------------------------
-  Site nav
-----------------------------------------*/
-.site-nav
-  $rt-align-val = s('calc((100% - %s) / 2)', $base-max-w)
-
-  absolute right top
-  width 100%
-  height 100%
-  background-color $black-c
-  padding-right $rt-align-val
-
-  .flexbox &
-    @extend .f-box
-    @extend .f-align--2-3
-  
-  .csstransforms &
-    transform translateX(100%)
-    
-    &.is-active
-      transform translateX(0)
-
-
-  .no-csstransforms &
-    left 100%
-    
-    &.is-active
-      left auto
-      right 0
-      
-
-  &__opener
-    size 20px
-    display inline-block
-    background-color red
-    cursor pointer
-    
-
-  &__list
-    text-align right
-    
-  &__link
-    display block
-    font-size 36px
-    font-weight 700
-    color $white-c
-    trans color
-
-    &:hover
-      color $brand-c      
-
-/*----------------------------------------
-  Pre-header
-----------------------------------------*/
-.pre-header
-  fixed right left top
-  z-index: 1
-  
-  &__container
-    container()
-    hLine middle
-    text-align right
-    
-  
-
-make-skewed-bg(x)
-  transform: translate3d(0,0,0);
-  &:before
-    pb top left -50%
-    left s('calc(-50% + %s)', x)
-    size 100%
-    transform skew(-15deg)
-    transform-origin 0 0
-    background-color $brand-c
-    backface-visibility hidden
-    z-index: -1
-
-
-/*----------------------------------------
-  Bullit list constructor
-----------------------------------------*/
-make-bullit-list($clr = $black-c)
-  &>*
-    position relative
-    padding-left 20px
-    
-    &:before
-      absolute left top 1px
-      content '•'
-      color $clr
-      
-
-
-/*----------------------------------------
-  Typography
-----------------------------------------*/
-.uv-typography
-  font-size 18px
-  font-weight 300
-
-  h4,ul,li,p
-    margin-bottom 5px
-  
-  h4
-    font-weight 700
-    line-height 22px
-
-  i
-    font-style italic
-    
-  ul
-    make-bullit-list $brand-c
-      
-  
-
-/*----------------------------------------
-  Button
-----------------------------------------*/
-.uv-btn
-  pressable()
-  size 100% $h
-  height 50px
-  border-size 3px
-  border-style solid
-  padding 0
-  font-size: 13px
-  font-weight 900
-  text-align center
-  text-transform: uppercase
-  cursor pointer
-  overflow hidden
-  trans color
-
-  &:focus
-    outline none
-    
-  .csstransforms &
-    &:before
-      pb left top
-      size 100%
-      trans transform
-      transform rotateY(90deg) skew(45deg)
-      backface-visibility hidden
-      z-index: -1
-      
-    &:hover:before
-      transform rotateY(0) skew(45deg)
-      
-  
-
-  -theme($def-c,$hov-c)
-    color $def-c
-    border-color $def-c
-
-    &:hover
-      color $hov-c
-
-    .csstransforms &
-      &:before
-        background-color $def-c
-        
-    .no-csstransforms &
-      &:hover
-        background-color $hov-c
-    
-
-  //default theme: black-n-white
-  -theme($black-c,$white-c)
-  
-  &--brand-n-black
-    -theme($brand-c,$black-c)
-    
-  &--white-n-black
-    -theme($white-c,$black-c)
-
-/*----------------------------------------
-  Sections
-----------------------------------------*/
-.uv-section
-  
-  // can't extend parent dependency
-  &__container
-    container()
-    height 100%
-    .flexbox &
-      @extend .f-box
-      @extend .f-dir--col
-      @extend .f-align--13-2
-
-
-  $types = 'gray' 'white' 'brand' 'black'
-  
-  for $type in $types
-    &--{unquote($type)}
-      background-color lookup('$' + $type + '-c')
-
-
-
-  &__title
-    color $black-c
-    font-size 48px
-    font-weight 900
-    text-transform uppercase
-    
-    &--white
-      color $white-c
-
-  
-
-/*----------------------------------------
-  Nav component
-----------------------------------------*/
-$nav = unquote('.uv-nav')
-.uv-nav
-  position relative
-  z-index: 1
-  
-
-  &--horisontal
-    hLine bottom $unit-gap
-    
-
-  &__unit
-    width: 165px
-    position relative
-    overflow hidden
-    font-size 14px
-    line-height: 1
-    font-weight 700
-    text-transform uppercase
-    trans()
-    cursor pointer
-
-    .csstransforms &
-      &:before
-        trans()
-        pb left right top bottom
-        transform translateY(calc(100% \- 5px))
-        z-index: -1
-   
-
-    &.is-active
-      cursor default
-      padding-left 10px
-      
-      .csstransforms &
-        &:before
-          transform translateY(0)
-
-
--set-nav-theme($def-text-c, $hov-text-c, $def-badge-c, $act-badge-c, $hov-badge-c = null)
-  color $def-text-c
-
-  .csstransforms &
-    &:before
-      background-color $def-badge-c
- 
-
-  &:hover
-    .csstransforms &
-      &:before
-        if $hov-badge-c isnt null
-          background-color $hov-badge-c
-        else
-          background-color $act-badge-c
-    .no-csstransforms &
-      color $hov-text-c
-
-
-  &.is-active
-    color $hov-text-c
-    
-    .csstransforms &
-      &:before
-        background-color $act-badge-c
-    
-    .no-csstransforms &
-      background-color $act-badge-c
-
-
-
-/*----------------------------------------
   Sections
 ----------------------------------------*/
 .s
 
-  /*----------------------------------------
-    Hero (section 1)
-  ----------------------------------------*/
-  &-hero
-    $hero-font-c = darken($black-c, 50%)
-
-    position relative
-    overflow hidden
-    color $hero-font-c
-    transform: translate3d(0,0,0) //prevent flicker on button
-    make-skewed-bg 325px
-    
-
-    &__container
-      @extend .uv-section__container
-      
-      .flexbox &
-        @extend .f-align--13-13
-      
-    
-    &__header
-      width 475px
-      
-      .flexbox &
-        @extend .f-box
-        @extend .f-dir--col
-        @extend .f-align--1-2
-      
-
-
-    &__title
-      text-transform: uppercase
-      font-weight 900
-      font-size 130px
-      line-height: .75
-
-      &__font-accent
-        font-weight 100
-        
-      &__font-equal
-        display block
-        letter-spacing 3px
-
-
-    &__time
-      //inherited styles from &__title
-      margin-left 5px
-      font-size 40px
-      font-weight 100
-      text-transform: lowercase
-      
-
-    &__btn
-      @extend .uv-btn
-      @extend .uv-btn
-      border-width 6px
-      height 70px
-      margin-y 60px
-      
-
-    &__cite
-      color #7B6C03
-      font-size 14px
-      
   
   /*----------------------------------------
-    Whats new (section 2)
+    Whats new
   ----------------------------------------*/
   &-whats-new
     container()
@@ -416,7 +71,7 @@ $nav = unquote('.uv-nav')
 
 
   /*----------------------------------------
-    For whom (section 3)
+    For whom
   ----------------------------------------*/
   &-for-whom
     $sections-quantity = 6px
@@ -512,25 +167,15 @@ $nav = unquote('.uv-nav')
             
 
   /*----------------------------------------
-    Speakers (section 4)
+    Speakers
   ----------------------------------------*/
   &-speakers
     $unit-h = 275px
-
     $unit-photo-h = 170px
-    
     $bg-c = #191919
     $contrast-c = #242424
 
     background-color $bg-c
-
-    &__container
-      @extend .uv-section__container
-      
-      .flexbox &
-        @extend .f-dir--col
-        @extend .f-align--13-2
-   
 
     &__title
       @extend .uv-section__title
@@ -667,14 +312,12 @@ $nav = unquote('.uv-nav')
 
 
   /*----------------------------------------
-    Program (section 5)
+    Program
   ----------------------------------------*/
   &-program
     @extend .uv-section--gray
     
-    &__container
-      // @extend .uv-section__container
-    
+
     &__title
       @extend .uv-section__title
       complex-vunit(margin-bottom, 5vh, 50px)
@@ -817,12 +460,12 @@ $nav = unquote('.uv-nav')
             color darken($gray-c, 50%)
     
 
-
   
   /*----------------------------------------
-    Pricing (section 6)
+    Pricing
   ----------------------------------------*/
   &-pricing
+    prevent-flicker()
     .flexbox &
       @extend .f-box
       
@@ -865,7 +508,6 @@ $nav = unquote('.uv-nav')
 
       
       &__container
-        backface-visibility hidden
         container 60%
         font-weight 200
         font-size 16px
@@ -896,6 +538,7 @@ $nav = unquote('.uv-nav')
         complex-vunit(margin-top, 15vh, $unit-w)
         font-size $footer-fz
         color $gray-c
+        prevent-flicker()
 
 
       &__price
@@ -912,7 +555,7 @@ $nav = unquote('.uv-nav')
       &__btn
         @extend .uv-btn
         border-width 4px
-        margin-top 10px
+        margin-top 10pxn
         
 
 
@@ -941,9 +584,8 @@ $nav = unquote('.uv-nav')
 
 
 
-
   /*----------------------------------------
-    video (section 7)
+    Video
   ----------------------------------------*/
   &-video
     @extend .uv-section--black
@@ -1015,9 +657,8 @@ $nav = unquote('.uv-nav')
 
 
 
-
   /*----------------------------------------
-    video (section 8)
+    Partners
   ----------------------------------------*/
   &-partners
     @extend .uv-section--gray
@@ -1073,5 +714,3 @@ $nav = unquote('.uv-nav')
           font-size 11px
           font-weight 700
           
-
-

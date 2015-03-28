@@ -1,0 +1,60 @@
+.onepage-section.s-partners.site-footer__wrap
+  section.uv-section__container.site-footer__wrap__main
+    header
+      h2.s-partners__title Партнеры
+
+    ul.s-partners__nav
+      li.s-partners__nav__unit.is-active партнеры
+      li.s-partners__nav__unit инфо-партнеры
+
+    ul
+      li.s-partners__category.is-active
+        ul.s-partners__category__list
+          - i = 0
+          while i < 2
+            - i++
+            
+            if i == 1
+              li 
+                h3.s-partners__logo--general__caption генеральный партнер
+                a.s-partners__logo.s-partners__logo--general(href="http://google.com/", target="_blank")
+                  figure
+                    +picture('partners/cat-1/partner-general')(class="s-partners__logo__img")
+                    figcaption.is-hidden Kikstarter
+            - n = 0
+            while n < 3
+              - n++
+              li
+                a.s-partners__logo(href="http://google.com/", target="_blank")
+                  figure
+                    - imgPath = 'partners/cat-1/partner-' + n
+                    +picture(imgPath)(class="s-partners__logo__img")
+                    figcaption.is-hidden Wargaming
+
+      li.s-partners__category
+        ul.s-partners__category__list
+          - i = 0
+          while i < 2
+            - i++
+            
+            if i == 2
+              li 
+                h3.s-partners__logo--general__caption генеральный партнер
+                a.s-partners__logo.s-partners__logo--general(href="http://google.com/", target="_blank")
+                  figure
+                    +picture('partners/cat-1/partner-general')(class="s-partners__logo__img")
+                    figcaption.is-hidden Kikstarter
+            - n = 0
+            while n < 3
+              - n++
+              li
+                a.s-partners__logo(href="http://google.com/", target="_blank")
+                  figure
+                    - imgPath = 'partners/cat-2/partner-' + n
+                    +picture(imgPath)(class="s-partners__logo__img")
+                    figcaption.is-hidden Wargaming
+
+
+  //- Footer
+  include ../layout/footer.jade
+ 

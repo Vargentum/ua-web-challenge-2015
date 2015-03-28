@@ -231,7 +231,7 @@ gulp.task 'watch', ->
     gulp.start 'jade'
   )
   $.watch(path.iconFont.src, ->
-    gulp.start 'iconFont'
+    gulp.start 'icon-font'
   )
   $.watch('./Gulpfile.coffee', ->
     gulp.start 'build'
