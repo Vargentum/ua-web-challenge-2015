@@ -70,7 +70,8 @@ class SpeakersTabs extends Tabs
     @sliderConfig = config.slider.config
     
     @sliderConfig.onSliderLoad = =>
-      @countSlides()
+      $(document).ready =>
+        @countSlides()
     @sliderConfig.onSlideBefore = =>
       @countSlides()
     @sliderConfig.onSlideAfter = =>
@@ -91,6 +92,7 @@ class SpeakersTabs extends Tabs
   countSlides: (type) =>
     if @currentCounter
       @currentCounter.text @slider.getCurrentSlide() + 1
+
     
     if @totalCounter
       @totalCounter.text @slider.getSlideCount()
