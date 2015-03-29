@@ -1,3 +1,16 @@
+mixin socialButtons(modifier)
+  //use without semantic to avoid typography inheritance
+  div(class="uv-social " + modifier)
+    div
+      a.uv-social__link.uv-icon--social-fb(href="#") Facebook
+    div
+      a.uv-social__link.uv-icon--social-vk(href="#") Vkontakte
+    div
+      a.uv-social__link.uv-icon--social-tw(href="#") Twitter
+
+
+
+
 mixin buyTicketBtn(cls)
   button(class=cls) Купить билет
 

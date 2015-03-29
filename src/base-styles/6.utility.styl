@@ -113,24 +113,29 @@ for $each in $hLine-cases
   
   &--brand-n-black
     -theme($brand-c,$black-c)
-    
+
   &--white-n-black
     -theme($white-c,$black-c)
+
 
 /*----------------------------------------
   Sections
 ----------------------------------------*/
+section-container()
+  container()
+  height 100%
+  .flexbox &
+    @extend .f-box
+    @extend .f-dir--col
+    @extend .f-align--13-2
+
+
+
 .uv-section
   
   // can't extend parent dependency
   &__container
-    container()
-    height 100%
-    .flexbox &
-      @extend .f-box
-      @extend .f-dir--col
-      @extend .f-align--13-2
-
+    section-container()
 
   $types = 'gray' 'white' 'brand' 'black'
   
@@ -222,3 +227,93 @@ $nav = unquote('.uv-nav')
       background-color $act-badge-c
 
 
+
+
+/*----------------------------------------
+  Social
+----------------------------------------*/
+.uv-social
+  hLine middle 10px
+  
+  &__link
+    hide-text()
+    ctr-at 33px
+    border-radius 50%
+    background-color darken($black-c, 50%)
+    color $white-c
+    trans()
+    
+    &:before
+      font-size 14px // font-size 0 at parent
+
+    &:hover
+      color $brand-c
+      complex-transform('y', -3px)
+
+
+
+
+  &--article
+    hLine middle 15px
+    
+    &__label    
+      color #555
+      font-size 11px
+      font-weight 700
+      text-transform uppercase
+
+    &__wrap
+      hLine middle 5px
+
+
+
+/*----------------------------------------
+  Article
+----------------------------------------*/
+.uv-article
+  @extend .uv-typography
+  font-weight 400
+  font-size 16px
+
+
+  &__title
+    position relative
+    font-size 24px
+    font-weight 700
+    font-style italic
+    padding-bottom 20px
+    margin-bottom 20px
+    
+    //divider
+    &:before
+      pb left bottom
+      size 120px 4px
+      background-color alpha($gray-c, .5)
+
+
+  &__sub-title
+    color $white-c
+    text-transform: uppercase
+    font-weight 500
+    margin-top 20px
+
+
+  &__footer
+    margin-top 30px
+    padding-top 30px
+    border-top 1px solid alpha($gray-c, .5)
+    
+    .flexbox &
+      @extend .f-box
+      @extend .f-align--2-13
+      
+    .no-flexbox &
+      jLine()
+
+
+  &__btn
+    @extend .uv-btn
+    @extend .uv-btn--brand-n-black
+    width 350px
+
+  

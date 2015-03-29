@@ -1,0 +1,53 @@
+.uv-modal
+    
+
+  &__wrap
+    fixed left right top bottom
+    z-index: 100
+    test()
+    
+    $types = 'gray' $black-c
+            ,'black' $gray-c
+    
+    for $type in $types
+      &.{unquote($type[0])}
+        $clr = lookup('$'+$type[0]+'-c')
+        background-color $clr
+        color $type[1]
+
+
+
+  &__content
+    display none      
+
+
+  &__wrap  &__content
+    @extend .uv-typography
+    section-container()
+    display block
+    
+    .flexbox &
+      @extend .f-box
+      @extend .f-dir--col
+      @extend .f-align--13-2
+      
+
+
+  &__closer
+    @extend .uv-icon--close
+    ctr-at 40px
+    background-color #141414
+    absolute right 20px top 20px
+    color alpha($white-c,.7)
+    trans color
+    cursor: pointer
+    
+    &:hover
+      color $white-c
+
+    &:active
+      margin-top 1px
+    
+    .csscalc &
+      right s('calc(50% - %s / 2)', $base-max-w)
+      

@@ -27,16 +27,32 @@
       while i < 9
         - i++
         each speaker in speakers
-          li.uv-popup__trigger.s-speakers__person(data-speakers-type='#{speaker}')
+          li.uv-modal.s-speakers__person(data-theme="black", data-speakers-type='#{speaker}')
             img.s-speakers__person__photo(src="http://fakeimg.pl/165x170/?text=Photo", alt="")
-            div.uv-popup__info.s-speakers__person__body
+            div.s-speakers__person__body
               h3.s-speakers__person__name #{speaker}
               p розработчик комплексных супер-пупер решений
-              article.uv-popup__info
-                h2 Самая ужасная вёрстка в мире: десять советов
-                p Многолетний опыт сконцентрированный в советах которым не нужно следовать ни при каких обстоятельствах. Трудно переоценить вред от этого доклада.
+              article.uv-modal__content.uv-article
+                header
+                  h2.uv-article__title Build tons of multi-device JavaScript applications, design patterns & high performance UI
+                p И вот я беру хрустальный шар и вангую, что уже совсем скоро все изменится.
+                p Мы вступаем в эпоху Дилетантов. Клиенты будут решать большинство веб-задач без привлечения специально обученных людей (нас).
+                ul
+                  li search engine marketing (SEM)
+                  li display advertising
+                  li remarketing
+                  li E-mail marketing
+                  li Google Analytics
+                p Остальное — на лекции. До встречи.
+                aside
+                  h3.uv-article__sub-title Олександр Трегуб
+                  p Арт-директор дизайн-студии Akademia, сооснователь курса веб-дизайна в Школе визуальных технологий, автор "Метода казанка".
+                  p Язык выступления: русский
                 
-                footer
-                  h3 Юрий Артюх
-                  p Представитель украинского крыла «Web Standards Group», совладелец учебного центра Smartme.com.ua.
-                  +buyTicketBtn('s-speakers__buy-ticket-btn')
+                footer.uv-article__footer
+                  +buyTicketBtn('uv-article__btn')
+                  
+                  div.uv-social--article__wrap
+                    span.uv-social--article__label поделиться
+                    +socialButtons('uv-social--article')
+

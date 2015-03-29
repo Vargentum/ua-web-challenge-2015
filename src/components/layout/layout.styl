@@ -148,7 +148,7 @@
 
   &__trigger
     pressable()
-    @extend .uv-icon--menu-open
+    @extend .uv-icon--menu
     ctr-at 40px
     background-color #191919
     color $white-c
@@ -166,7 +166,7 @@
       color $brand-c
 
     &.is-active
-      @extend .uv-icon--menu-close
+      @extend .uv-icon--close
       color alpha($white-c, 50%)
 
       &:hover
@@ -244,26 +244,7 @@
       sprite-retina $logo-copyright
       margin-x 10px
 
-
-
-  &__social
-    hLine middle 10px
-    
-    &__link
-      hide-text()
-      ctr-at 33px
-      border-radius 50%
-      background-color darken($black-c, 50%)
-      color $white-c
-      trans()
-      
-      &:before
-        font-size 14px // font-size 0 at parent
-
-      &:hover
-        color $brand-c
-        complex-transform('y', -3px)
-    
+  
   
   &__mail-link
     color $white-c

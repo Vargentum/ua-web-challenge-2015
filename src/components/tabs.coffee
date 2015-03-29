@@ -18,7 +18,7 @@ class Tabs
 
   init: =>
     @nav.click (event) =>
-      $current = $(event.target)
+      $current = $(event.currentTarget)
       if not $current.hasClass @activeCls
         @switch( $current.index() )
 
