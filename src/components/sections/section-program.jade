@@ -1,49 +1,38 @@
 .onepage-section.s-program
+  - types = ['All', 'Opening', 'Front-end day', 'Back-end day', 'Qa day', 'Web-design day', 'Soft skills', 'Afterparty']
+
   section.uv-section__container.s-program__container
     header
       h2.s-program__title Программа
 
+
     .s-program__body
       nav.s-program__nav__list
         ul
-          li.s-program__nav
-            time.s-program__nav__time 12.04 - 18.04
-            | вся программа
-          li.s-program__nav
-            time.s-program__nav__time 12.04 - 18.04
-            | вся программа
-          li.s-program__nav
-            time.s-program__nav__time 12.04 - 18.04
-            | вся программа
-          li.s-program__nav
-            time.s-program__nav__time 12.04 - 18.04
-            | вся программа
-          li.s-program__nav
-            time.s-program__nav__time 12.04 - 18.04
-            | вся программа
-          li.s-program__nav
-            time.s-program__nav__time 12.04 - 18.04
-            | вся программа
-          li.s-program__nav
-            time.s-program__nav__time 12.04 - 18.04
-            | вся программа
-          li.s-program__nav
-            time.s-program__nav__time 12.04 - 18.04
-            | вся программа
+          each type in types
+            li.s-program__nav(class= type == 'All' ? 'is-active' : '')
+              time.s-program__nav__time 12.04 - 18.04
+              if type == 'All'
+                | Все программы
+              else
+                | #{type}
+          
 
-
-      ul.s-program__schedule
-        - i = 0
-        while i < 7
-          - i++
-          li
-            article.s-program__schedule__unit
-              header.s-program__schedule__unit__header
-                time 09:00-10:00
-                h3 Александр Трегуб
-              p Место юзабилити в процессе разработки. Мечты и реалии 
-          if i == 3
-            li.s-program__schedule__unit--dinner
-              time 13:00-14:00
-              i.s-program__schedule__unit--dinner__icon
-              span обед
+      .s-program__schedule__wrap
+        each type in types
+          ul.s-program__schedule(class= type == 'All' ? 'is-active' : '')
+            - i = 0
+            while i < 7
+              - i++
+              li
+                article.s-program__schedule__unit.uv-modal(data-modal-theme='gray')
+                  header.s-program__schedule__unit__header
+                    time 09:00-10:00
+                    h3= type
+                  p Место юзабилити в процессе разработки. Мечты и реалии 
+                  +modalArticle()
+              if i == 3
+                li.s-program__schedule__unit--dinner
+                  time 13:00-14:00
+                  i.s-program__schedule__unit--dinner__icon
+                  span обед

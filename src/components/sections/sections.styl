@@ -353,11 +353,20 @@
 
 
     &__schedule
+      display none
       
-      .flexbox &
-        @extend .f-fill
-      .no-flexbox &
-        width 70%
+      &.is-active
+        display block
+
+
+      &__wrap
+      
+        .flexbox &
+          @extend .f-fill
+        .no-flexbox &
+          width 70%
+          
+        
 
       &__unit
         $border-c = #c8c8c8

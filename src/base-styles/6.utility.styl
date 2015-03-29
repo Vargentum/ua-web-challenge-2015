@@ -290,12 +290,27 @@ $nav = unquote('.uv-nav')
       size 120px 4px
       background-color alpha($gray-c, .5)
 
+      .uv-modal__wrap.gray &
+        background-color alpha($black-c, .5)
+
+
+  ul
+    make-bullit-list($white-c)
+
+    .uv-modal__wrap.gray &
+      make-bullit-list($black-c)
+    
+
 
   &__sub-title
     color $white-c
     text-transform: uppercase
     font-weight 500
     margin-top 20px
+
+    .uv-modal__wrap.gray &
+      color $black-c
+
 
 
   &__footer
@@ -310,10 +325,15 @@ $nav = unquote('.uv-nav')
     .no-flexbox &
       jLine()
 
+    .uv-modal__wrap.gray &
+      border-top-color alpha($black-c, .5)
+
 
   &__btn
-    @extend .uv-btn
-    @extend .uv-btn--brand-n-black
     width 350px
+    @extend .uv-btn
+
+    .uv-modal__wrap.black &
+      @extend .uv-btn--brand-n-black
 
   

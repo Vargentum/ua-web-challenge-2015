@@ -6,7 +6,7 @@ class Modal
 
   renderPopup: ($trigger) =>
     $content = $trigger.find('.uv-modal__content')
-    $theme = $trigger.data('theme')
+    $theme = $trigger.data('modal-theme')
     @container.addClass $theme
               .append $content
               .appendTo 'body'
