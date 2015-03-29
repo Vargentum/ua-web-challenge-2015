@@ -70,7 +70,7 @@ class SpeakersTabs extends Tabs
     @sliderConfig = config.slider.config
     
     @sliderConfig.onSliderLoad = =>
-      @countSlides 'all'
+      @countSlides()
     @sliderConfig.onSlideBefore = =>
       @countSlides()
     @sliderConfig.onSlideAfter = =>
@@ -89,15 +89,16 @@ class SpeakersTabs extends Tabs
 
 
   countSlides: (type) =>
-    @currentCounter.text @slider.getCurrentSlide() + 1
-    if type is 'all'
+    if @currentCounter
+      @currentCounter.text @slider.getCurrentSlide() + 1
+    
+    if @totalCounter
       @totalCounter.text @slider.getSlideCount()
-
 
 
   reloadSlider:  =>
     @slider.reloadSlider()
-    @countSlides 'all'
+    @countSlides()
 
 
   filter: (type) =>

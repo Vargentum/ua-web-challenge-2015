@@ -18,6 +18,8 @@ Any of evergreen browsers or IE11
 Responsive
 Old browsers support
 
+## Hint
+Simplify navigation by using `↑` or `↓`
 
 ## Develop
 ```
