@@ -2,7 +2,7 @@
     
 
   &__wrap
-    fixed left right top bottom
+    absolute left right top bottom
     z-index: 100
     
     $types = 'gray' $black-c
@@ -47,6 +47,7 @@
     &:active
       margin-top 1px
     
-    .csscalc &
-      right s('calc(50% - %s / 2)', $base-max-w)
-      
+    +lg()
+      .csscalc &
+        right s('calc(50% - %s / 2)', $base-max-w)
+        

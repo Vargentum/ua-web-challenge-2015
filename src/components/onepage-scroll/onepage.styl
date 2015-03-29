@@ -3,13 +3,14 @@ $disabled-scroll = unquote('.disabled-onepage-scroll')
 
 body
 html
-  overflow: hidden;
   transition: opacity 400ms;
   display block
   size 100%  
+  overflow hidden
 
   &{$disabled-scroll}
     position: inherit
+    overflow-y: visible
 
 
 
@@ -71,3 +72,17 @@ html
       position: relative !important;
       top: auto !important;
       left: auto !important;
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
