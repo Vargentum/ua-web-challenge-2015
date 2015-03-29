@@ -144,7 +144,7 @@ new SpeakersTabs(
       slideMargin: 30
       pager: off
       infiniteLoop: off
-      auto: on
+      auto: off
       autoHover: on
       controls: on
       hideControlOnEnd: on
