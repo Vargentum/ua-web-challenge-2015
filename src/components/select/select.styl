@@ -1,0 +1,121 @@
+/* Dropdown control */
+
+$select-arrow-w = 20px
+
+.selectBox-dropdown 
+    position: relative
+    background-color $black-c
+    text-decoration: none
+    text-align: left
+    vertical-align: middle
+    display: inline-block
+    cursor: default
+    color $white-c
+    padding 10px
+    font-size 14px 
+    font-weight 700
+    overflow hidden
+
+
+.selectBox-label 
+    ellipsis()
+    width auto !important
+    
+
+.selectBox-arrow 
+    $axis = 6px solid $white-c
+    absolute right top bottom
+    width $select-arrow-w
+    
+    &:before
+        p-ctr()
+        border-top $axis
+        border-right 5px solid transparent    
+        border-left @border-right
+        trans transform .1s
+        transform-origin 50%
+
+
+    .selectBox-menuShowing &:before
+        .csstransforms &
+            transform translate(-50%,-50%) rotate(180deg)
+        .no-csstransforms &
+            border-top none
+            border-bottom 6px solid $white-c
+        
+
+
+
+/* Dropdown menu */
+.selectBox-dropdown-menu 
+    position: absolute
+    z-index: 99999
+    max-height: 200px
+    min-height: 1em
+    background: $black-c
+    overflow: auto
+    -webkit-overflow-scrolling: touch
+    font-size 14px 
+    font-weight 700
+
+/* Inline control */
+.selectBox-inline 
+    background: alpha($black-c, .8)
+    display: inline-block
+    overflow: auto
+
+.selectBox-inline:focus 
+    border-color: #666
+
+/* Options */
+.selectBox-options,
+.selectBox-options LI,
+.selectBox-options LI A 
+    list-style: none
+    display: block
+    cursor: default
+    padding: 0
+    margin: 0
+
+// .selectBox-options.selectBox-options-top
+// .selectBox-options.selectBox-options-bottom
+
+.selectBox-options LI A 
+    display block
+    padding 5px 10px
+    ellipsis()    
+    color alpha($white-c, .5)
+    cursor pointer
+    trans()
+
+.selectBox-options LI.selectBox-hover A 
+    color alpha($white-c, 1)
+
+.selectBox-options LI.selectBox-disabled A 
+    color: #888
+
+.selectBox-options LI.selectBox-selected A 
+    background-color: $brand-c
+    color $black-c
+
+.selectBox-options .selectBox-optgroup 
+    color: #666
+    background: #EEE
+    font-weight: bold
+    line-height: 1.5
+    padding: 0 .3em
+    white-space: nowrap
+
+/* Disabled state */
+.selectBox.selectBox-disabled 
+    color: #888 !important
+
+.selectBox-dropdown.selectBox-disabled .selectBox-arrow 
+    opacity: .5
+    border-color: #666
+
+.selectBox-inline.selectBox-disabled 
+    color: #888 !important
+
+.selectBox-inline.selectBox-disabled .selectBox-options A 
+    background-color: transparent !important
