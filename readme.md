@@ -15,8 +15,7 @@ Any of evergreen browsers or IE11
 
 
 ## Not done
-Responsive
-Old browsers support
+Responsive.Old browsers support
 
 ## Hint
 Simplify navigation by using `↑` or `↓`
