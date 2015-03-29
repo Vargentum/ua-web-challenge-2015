@@ -1,45 +1,27 @@
 Ua Web Challenge 2015
 =============
 
+## Time statistic
+Estimation - 40h. Spent - 24h
 
-## From the beginning
+So, I can't do all perfect. Especially for mobile devices & old browsers.
 
-Install Node.js, NPM, brew.
+## Best view
+Any of evergreen browsers or IE11
 
-Install Gulp globally. After that install local dependencies.
+1920 - 1024 width
+
+1024 - 768 height
+
+
+## Not done
+Responsive
+Old browsers support
+
+
+## Develop
 ```
 npm install gulp -g
 npm install
+gulp
 ```
-
-## GraphicsMagick or ImageMagick
-
-Make sure GraphicsMagick or ImageMagick is installed on your system and properly set up in your PATH.
-
-Ubuntu:
-```
-apt-get install imagemagick
-apt-get install graphicsmagick
-```
-
-Mac OS X (using Homebrew):
-```
-brew install imagemagick
-brew install graphicsmagick
-```
-
-Windows & others:
-http://www.imagemagick.org/script/binary-releases.php
-
-
-## Build & Develop
-Type `gulp build` to get project builded.
-
-Run `gulp` command to fire development server.
-
-
-## Flex Tools
-CSS set of flexbox based layout helpers is included to this project. 
-See [docs](http://flex-tools.vargentum.com/) for details.
-
-
