@@ -407,7 +407,7 @@ make-skewed-bg(x)
     pb top left -50%
     left s('calc(-50% + %s)', x)
     size 100%
-    transform skew(-15deg)
+    transform skew($skew-angle)
     transform-origin 0 0
     background-color $brand-c
     backface-visibility hidden

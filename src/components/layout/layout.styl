@@ -1,4 +1,54 @@
 /*----------------------------------------
+  Pre-loader
+----------------------------------------*/
+.site-preloader
+  fixed left right bottom top
+  pointer-events none
+  z-index: 100
+  
+  -half()
+    pb top bottom
+    background-color $black-c
+    width 60%
+    trans transform .2s
+
+
+  &:before
+    -half()
+    left 0
+    transform skew($skew-angle)
+    transform-origin 50% 0
+
+  &:after
+    -half()
+    right 0
+    transform-origin 50% 100%
+    transform skew($skew-angle)
+    
+    
+  &.is-disabled
+    &:before
+      transform skew($skew-angle) translateX(-100%)
+      
+    &:after
+      transform skew($skew-angle) translateX(100%)
+
+
+
+  .no-csstransforms &
+  .ie9 &
+    background-color $black-c
+    &:before
+      display none
+
+    &.is-disabled 
+      display none
+
+    
+
+
+
+/*----------------------------------------
   Pre-header
 ----------------------------------------*/
 .site-pre-header
@@ -110,14 +160,20 @@
 
   &__video
     fixed left top right bottom
+    background-color $black-c
     z-index: 1000
     trans transform
+    .csstransforms &
+      transform translateY(-100%) 
+    .no-csstransforms &
+      display none
     
-    &.is-disabled
+    &.is-active
       .csstransforms &
-        transform translateY(-100%) 
+        transform translateY(0)
+        
       .no-csstransforms &
-        display none
+        display block
         
 
     &__closer
@@ -189,7 +245,7 @@
     &:before
       pb left right top bottom
       background-color $black-c
-      transform skew(-15deg)
+      transform skew($skew-angle)
       transform-origin 50% 100%
       z-index: -1
     
