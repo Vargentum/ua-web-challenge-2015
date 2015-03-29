@@ -33,19 +33,7 @@
 
 
   &__closer
-    @extend .uv-icon--close
-    ctr-at 40px
-    background-color #141414
-    absolute right 20px top 20px
-    color alpha($white-c,.7)
-    trans color
-    cursor: pointer
-    
-    &:hover
-      color $white-c
-
-    &:active
-      margin-top 1px
+    make-closer()
     
     +lg()
       .csscalc &

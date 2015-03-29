@@ -57,6 +57,11 @@
     
   
   
+  &__container
+    section-container()
+    position relative
+
+  
   &__header
     height inherit
     width 475px
@@ -102,6 +107,61 @@
     color #7B6C03
     font-size 14px
 
+
+  &__video
+    fixed left top right bottom
+    z-index: 1000
+    trans transform
+    
+    &.is-disabled
+      .csstransforms &
+        transform translateY(-100%) 
+      .no-csstransforms &
+        display none
+        
+
+    &__closer
+      make-closer()
+      top auto
+      bottom 20px
+      background-color $brand-c
+      color $black-c
+      z-index: 1
+    
+
+
+    &__trigger
+      @extend .uv-icon--play-lg
+      ctr y
+      right 0
+      font-weight 300
+      color $gray-c
+      font-size 12px
+      text-align center
+      cursor pointer
+      
+      //icon
+      &:before
+        display block
+        margin 0 auto 15px
+        font-size 75px
+        line-height: 1
+        color $white-c
+        trans()
+
+      &:hover:before
+        color $brand-c
+        
+      &:active:before
+        relative top 1px
+        
+        
+      &__accent
+        display block
+        color $white-c
+        font-size 10px
+        font-weight 700
+        text-transform uppercase
 
 
 

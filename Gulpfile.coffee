@@ -49,11 +49,6 @@ path =
 
 
 
-gulp.task 'clear', ->
-  $.rimraf('./app')
-
-
-
 gulp.task 'font', ->
   gulp.src(path.font.src)
     .pipe($.ttf2woff())
@@ -239,7 +234,6 @@ gulp.task 'watch', ->
 
 
 gulp.task 'build', [
-  'clear'
   'jade'
   'styles'
   'icon-font'

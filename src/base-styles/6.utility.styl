@@ -121,16 +121,6 @@ for $each in $hLine-cases
 /*----------------------------------------
   Sections
 ----------------------------------------*/
-section-container()
-  container()
-  height 100%
-  .flexbox &
-    @extend .f-box
-    @extend .f-dir--col
-    @extend .f-align--13-2
-
-
-
 .uv-section
   
   // can't extend parent dependency
@@ -337,3 +327,22 @@ $nav = unquote('.uv-nav')
       @extend .uv-btn--brand-n-black
 
   
+
+/*----------------------------------------
+  Closer
+----------------------------------------*/
+make-closer()
+  @extend .uv-icon--close
+  ctr-at 40px
+  background-color #141414
+  absolute right 20px top 20px
+  z-index: 1
+  color alpha($white-c,.7)
+  trans color
+  cursor: pointer
+  
+  &:hover
+    color $white-c
+
+  &:active
+    margin-top 1px

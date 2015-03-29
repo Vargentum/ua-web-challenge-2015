@@ -1,5 +1,5 @@
 .onepage-section.site-header
-  section.uv-section__container
+  section.site-header__container
     header.site-header__header
       h1.site-header__title
         span.site-header__title__font-accent IT #[br]
@@ -11,4 +11,10 @@
       button.site-header__btn купить билет
       cite.site-header__cite ... у нас интересней всего ©Женя
 
-    aside.site-header__video
+    aside.site-header__video__trigger
+      span.site-header__video__trigger__accent смотреть видео
+      | 30 сек
+
+    aside.site-header__video.is-disabled(data-vide-bg='assets/video/header')
+      .site-header__video__closer
+

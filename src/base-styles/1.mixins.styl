@@ -442,3 +442,16 @@ handle-negative-z-index($pos = relative)
 ----------------------------------------*/
 prevent-flicker()
   transform: translate3d(0,0,0) 
+
+
+/*----------------------------------------
+  Section container mixin (can't be extendable in reason of parent inheritance)
+----------------------------------------*/
+section-container()
+  container()
+  height 100%
+  .flexbox &
+    @extend .f-box
+    @extend .f-dir--col
+    @extend .f-align--13-2
+
